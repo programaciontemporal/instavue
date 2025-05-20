@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('follows', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // El usuario que sigue
-            $table->foreignId('following_user_id')->constrained('users')->onDelete('cascade'); // El usuario seguido
+            $table->foreignId('following_user_id')->constrained('users')->onDelete('cascade'); // El usuario al que se sigue
             $table->timestamps();
 
-            // Asegura que un usuario no pueda seguir al mismo usuario más de una vez
+            // Para asegurar que un usuario solo pueda seguir a otro una vez
             $table->unique(['user_id', 'following_user_id']);
         });
     }

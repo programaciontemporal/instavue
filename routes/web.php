@@ -9,7 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
-
+use App\Http\Controllers\ExploreController; // Importado ExploreController
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -18,15 +18,14 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-// Route::get('dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
+// Las rutas de configuración se incluyen desde un archivo separado
 require __DIR__ . '/settings.php';
+// Las rutas de autenticación se incluyen desde un archivo separado
 require __DIR__ . '/auth.php';
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Rutas para el perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -38,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
-    // Rutas para el feed
+    // Rutas para el feed principal
     Route::get('/feed', [HomeController::class, 'index'])->name('feed');
 
     // Rutas para seguir/dejar de seguir
@@ -48,12 +47,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas para comentarios
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
-    // Da 'me gusta' a una publicación.
+    // Rutas para "Me gusta"
     Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('likes.store');
-
-    // Quita el 'me gusta' de una publicación.
     Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('likes.destroy');
 
     // Ruta para la página de explorar
-    Route::get('/explore', [\App\Http\Controllers\ExploreController::class, 'index'])->name('explore');
+    Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 });

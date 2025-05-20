@@ -15,7 +15,7 @@ class Like extends Model
     ];
 
     /**
-     * El usuario que dio el 'me gusta'.
+     * El usuario que dio "Me gusta".
      */
     public function user()
     {
@@ -23,7 +23,7 @@ class Like extends Model
     }
 
     /**
-     * La publicación a la que pertenece el 'me gusta'.
+     * La publicación a la que se dio "Me gusta".
      */
     public function post()
     {

@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return to_route('dashboard');
+        // Redirige al perfil del usuario recién registrado
+        return redirect()->route('profile.show', $user->id);
     }
 }

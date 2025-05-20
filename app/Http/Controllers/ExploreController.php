@@ -3,34 +3,55 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Facades\Auth;
 
 class ExploreController extends Controller
 {
     /**
-     * Muestra la página de explorar con publicaciones de usuarios no seguidos.
+     * Display the explore page with all posts.
      */
     public function index(): Response
     {
-        $user = Auth::user();
-
-        // Obtener IDs de usuarios que el usuario actual sigue o que son el propio usuario
-        $followingAndSelfIds = $user->following()->pluck('following_user_id')->push($user->id);
-
-        // Obtener publicaciones de usuarios que NO están en la lista anterior
-        $posts = Post::whereNotIn('user_id', $followingAndSelfIds)
-            ->with(['user', 'likes', 'comments']) // Eager load user, likes y comments
-            ->latest()
-            ->limit(30) // Limitar el número de posts para empezar
-            ->get();
-
-        // Puedes añadir aquí lógica para ordenar por popularidad si lo deseas más adelante
-        // Por ahora, es por fecha (latest())
+        $posts = Post::with(['user', 'likes', 'comments.user']) // Cargar relaciones necesarias
+                     ->latest()
+                     ->get()
+                     ->map(function ($post) {
+                         // Añadir si el usuario autenticado ha dado like
+                         $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
+                         return [
+                             'id' => $post->id,
+                             'image_path' => $post->image_path,
+                             'caption' => $post->caption,
+                             'created_at' => $post->created_at->diffForHumans(),
+                             'user' => [
+                                 'id' => $post->user->id,
+                                 'name' => $post->user->name,
+                                 'avatar' => $post->user->avatar, // Asegúrate de que el modelo User tenga un campo 'avatar'
+                             ],
+                             'likes' => $post->likes->map(fn($like) => ['user_id' => $like->user_id]), // Solo el ID del usuario para el frontend
+                             'likes_count' => $post->likes->count(),
+                             'comments' => $post->comments->map(function ($comment) {
+                                 return [
+                                     'id' => $comment->id,
+                                     'body' => $comment->body,
+                                     'user' => [
+                                         'id' => $comment->user->id,
+                                         'name' => $comment->user->name,
+                                     ],
+                                     'created_at' => $comment->created_at->diffForHumans(),
+                                 ];
+                             }),
+                             'comments_count' => $post->comments->count(),
+                             'is_liked_by_auth_user' => $post->is_liked_by_auth_user,
+                         ];
+                     });
 
         return Inertia::render('Explore', [
             'posts' => $posts,
+            'authUserId' => Auth::id(), // También pasamos el ID del usuario autenticado
         ]);
     }
 }

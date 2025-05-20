@@ -16,7 +16,7 @@ class Comment extends Model
     ];
 
     /**
-     * El usuario que realizó el comentario.
+     * El usuario que hizo el comentario.
      */
     public function user()
     {

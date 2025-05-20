@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,11 +13,11 @@ return new class extends Migration {
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // El usuario que da 'me gusta'
-            $table->foreignId('post_id')->constrained()->onDelete('cascade'); // La publicación que recibe 'me gusta'
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            // Asegura que un usuario no pueda dar 'me gusta' a la misma publicación más de una vez
+            // Para asegurar que un usuario solo pueda dar "Me gusta" una vez a una publicación
             $table->unique(['user_id', 'post_id']);
         });
     }
