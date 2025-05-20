@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import InputError from '@/components/InputError.vue';
 import PrimaryButton from '@/components/ui/button/Button.vue';
 import TextInput from '@/components/ui/input/Input.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import { computed } from 'vue'; // Importar computed para propiedades reactivas
+//import { computed } from 'vue'; // Importar computed para propiedades reactivas
 
 const props = defineProps({
     posts: Array,
@@ -12,7 +12,7 @@ const props = defineProps({
 });
 
 // Función para inicializar el formulario de comentario para cada post
-const getCommentForm = (postId) => {
+const getCommentForm = (postId: any) => {
     return useForm({
         body: '',
         post_id: postId,
