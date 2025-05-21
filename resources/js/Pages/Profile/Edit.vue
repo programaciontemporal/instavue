@@ -1,8 +1,8 @@
 <script setup>
-import AppLayout from '@/layouts/AppLayout.vue';
-import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue';
-import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
+import AppLayout from '@/layouts/AppLayout.vue'; // CAMBIO: Usar AppLayout en lugar de AuthenticatedLayout
+import DeleteUserForm from './Partials/DeleteUserForm.vue';
+import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
+import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
@@ -16,21 +16,20 @@ defineProps({
 </script>
 
 <template>
+    <Head title="Perfil" />
 
-    <Head title="Editar Perfil" />
-
-    <AppLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Editar Perfil
-            </h2>
+    <AppLayout> <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Perfil</h2>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <UpdateProfileInformationForm :must-verify-email="mustVerifyEmail" :status="status"
-                        class="max-w-xl" />
+                    <UpdateProfileInformationForm
+                        :must-verify-email="mustVerifyEmail"
+                        :status="status"
+                        class="max-w-xl"
+                    />
                 </div>
 
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">

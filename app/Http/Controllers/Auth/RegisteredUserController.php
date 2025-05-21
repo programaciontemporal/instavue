@@ -17,11 +17,13 @@ class RegisteredUserController extends Controller
 {
     /**
      * Show the registration page.
+     * Este método ha sido comentado/eliminado.
+     * La ruta 'auth.combined' ahora renderiza directamente el componente LoginRegisterSlider.vue.
      */
-    public function create(): Response
-    {
-        return Inertia::render('auth/Register');
-    }
+    // public function create(): Response
+    // {
+    //     return Inertia::render('auth/Register');
+    // }
 
     /**
      * Handle an incoming registration request.
@@ -46,7 +48,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Redirige al perfil del usuario recién registrado
         return redirect()->route('profile.show', $user->id);
     }
 }

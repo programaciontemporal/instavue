@@ -15,14 +15,16 @@ class AuthenticatedSessionController extends Controller
 {
     /**
      * Show the login page.
+     * Este método ha sido comentado/eliminado.
+     * La ruta 'auth.combined' ahora renderiza directamente el componente LoginRegisterSlider.vue.
      */
-    public function create(Request $request): Response
-    {
-        return Inertia::render('auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => $request->session()->get('status'),
-        ]);
-    }
+    // public function create(Request $request): Response
+    // {
+    //     return Inertia::render('auth/Login', [
+    //         'canResetPassword' => Route::has('password.request'),
+    //         'status' => $request->session()->get('status'),
+    //     ]);
+    // }
 
     /**
      * Handle an incoming authentication request.
@@ -33,7 +35,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redirigir al perfil del usuario autenticado
         return redirect()->route('profile.show', auth()->user());
     }
 

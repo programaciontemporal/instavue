@@ -9,21 +9,26 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
-use App\Http\Controllers\ExploreController; // Importado ExploreController
+use App\Http\Controllers\ExploreController;
+use App\Http\Controllers\SavedPostController; // Importar SavedPostController
+use Illuminate\Support\Facades\Auth; // Asegúrate de importar Auth
 
+// Ruta para la página de bienvenida (home)
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-    ]);
+    // Si el usuario no está autenticado, redirige a la nueva ruta combinada de login/registro
+    if (! Auth::check()) {
+        return redirect()->route('auth.combined'); // ¡Apuntamos a la nueva ruta unificada!
+    }
+    // Si está autenticado, redirige al feed
+    return redirect()->route('feed');
 })->name('home');
 
-// Las rutas de configuración se incluyen desde un archivo separado
+// Incluye las rutas de configuración desde un archivo separado
 require __DIR__ . '/settings.php';
-// Las rutas de autenticación se incluyen desde un archivo separado
+// Incluye las rutas de autenticación desde un archivo separado
 require __DIR__ . '/auth.php';
 
-
+// Grupo de rutas protegidas
 Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas para el perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,7 +54,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Rutas para "Me gusta"
     Route::post('/posts/{post}/likes', [LikeController::class, 'store'])->name('likes.store');
-    Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('likes.destroy');
+    Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('likes.destroy'); // ¡CORREGIDO!
+
+    // Rutas para Guardar/Desguardar Publicaciones
+    Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save');
+    Route::delete('/posts/{post}/unsave', [SavedPostController::class, 'destroy'])->name('posts.unsave'); // ¡CORREGIDO!
 
     // Ruta para la página de explorar
     Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
