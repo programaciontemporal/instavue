@@ -67,7 +67,8 @@ class PostController extends Controller
      */
     public function edit(Post $post): Response
     {
-        Gate::authorize('update', $post); // <-- Volvemos a añadir esta línea
+        Gate::authorize('update', $post);
+        $post->load('user');
         return Inertia::render('Posts/Edit', [
             'post' => $post,
         ]);
