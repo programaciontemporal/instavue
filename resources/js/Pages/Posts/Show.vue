@@ -144,7 +144,7 @@ const deletePost = () => {
                             {{ post.caption }}
                         </p>
 
-                        <!-- <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">{{ post.created_at }}</p> -->
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">{{ post.created_at }}</p>
 
                         <hr class="my-4 border-gray-200 dark:border-gray-700">
 
