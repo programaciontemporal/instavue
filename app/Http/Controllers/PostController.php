@@ -9,11 +9,13 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Gate; // Añadido para Gate/Authorization
-use Illuminate\Support\Facades\Auth; // Asegúrate de que Auth está importado
+use Illuminate\Support\Facades\Gate; // <-- Asegúrate de que esta línea esté presente
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    // ELIMINA COMPLETAMENTE EL MÉTODO __construct() de aquí.
+
     /**
      * Muestra el formulario para crear un nuevo post.
      */
@@ -38,7 +40,7 @@ class PostController extends Controller
 
         $imagePath = $request->file('image')->store('uploads', 'public');
 
-        Auth::user()->posts()->create([ // Usar Auth::user() en lugar de Auth()
+        Auth::user()->posts()->create([
             'caption' => $request->caption,
             'image_path' => $imagePath,
         ]);
@@ -65,7 +67,7 @@ class PostController extends Controller
      */
     public function edit(Post $post): Response
     {
-        Gate::authorize('update', $post);
+        Gate::authorize('update', $post); // <-- Volvemos a añadir esta línea
         return Inertia::render('Posts/Edit', [
             'post' => $post,
         ]);
@@ -76,7 +78,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post): RedirectResponse
     {
-        Gate::authorize('update', $post);
+        Gate::authorize('update', $post); // <-- Volvemos a añadir esta línea
 
         try {
             $request->validate([
@@ -97,7 +99,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post): RedirectResponse
     {
-        Gate::authorize('delete', $post);
+        Gate::authorize('delete', $post); // <-- Volvemos a añadir esta línea
 
         if ($post->image_path) {
             Storage::disk('public')->delete($post->getRawOriginal('image_path'));

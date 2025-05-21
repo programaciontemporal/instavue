@@ -8,7 +8,7 @@ import { getInitials } from '@/composables/useInitials';
 import { Heart, MessageSquare, Edit, Trash2 } from 'lucide-vue-next';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import { toast } from 'vue-sonner'; // Importa toast directamente de vue-sonner
+import { toast } from 'vue-sonner';
 
 const props = defineProps({
     post: Object,
@@ -112,15 +112,15 @@ const deletePost = () => {
                                 {{ post.user.name }}
                             </Link>
 
-                            <div v-if="authUserId === post.user_id" class="ml-auto flex space-x-2">
-                                <Link :href="route('posts.edit', post.id)" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500" title="Editar publicación">
-                                    <Edit class="w-5 h-5" />
-                                </Link>
-                                <Button @click="deletePost" variant="ghost" class="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500" title="Eliminar publicación">
-                                    <Trash2 class="w-5 h-5" />
+                            <div v-if="authUserId === post.user_id" class="ml-auto flex space-x-2 items-center">
+                                <Button as-child variant="ghost" size="icon" class="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-500" title="Editar publicación">
+                                    <Link :href="route('posts.edit', post.id)">
+                                        <Edit class="w-6 h-6" /> </Link>
                                 </Button>
+                                <Button @click="deletePost" variant="ghost" size="icon" class="text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-500" title="Eliminar publicación">
+                                    <Trash2 class="w-6 h-6" /> </Button>
                             </div>
-                        </div>
+                            </div>
 
                         <img :src="post.image_path" :alt="post.caption" class="w-full object-cover aspect-square rounded-md mb-4 shadow-sm">
 
@@ -143,8 +143,6 @@ const deletePost = () => {
                             </Link>
                             {{ post.caption }}
                         </p>
-
-                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-4">{{ post.created_at }}</p>
 
                         <hr class="my-4 border-gray-200 dark:border-gray-700">
 
