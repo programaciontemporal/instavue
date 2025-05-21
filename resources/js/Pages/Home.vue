@@ -75,7 +75,7 @@ const toggleLike = (post: any) => {
         </template>
 
         <div class="py-12">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div v-if="posts && posts.length > 0">
                     <div v-for="post in posts" :key="post.id"
                         class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">

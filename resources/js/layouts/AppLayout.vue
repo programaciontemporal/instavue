@@ -1,26 +1,15 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue'; // Necesario para 'computed'
+import { computed } from 'vue';
 
-// Asegúrate de que las rutas de estos componentes son correctas en tu proyecto
 import AppHeader from '@/components/AppHeader.vue';
-// AppSidebar no parece usarse directamente en este template, pero se mantiene la importación si la tienes en tu proyecto
-import AppSidebar from '@/components/AppSidebar.vue';
-import AppContent from '@/components/AppContent.vue';
-
-// Importar componentes de UI
-import Button from '@/components/ui/button/Button.vue';
-import DropdownMenu from '@/components/ui/dropdown-menu/DropdownMenu.vue';
-import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuContent.vue';
-import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue';
-import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
+import NavUser from '@/components/NavUser.vue'; // Importa NavUser.vue
 
 // Función de logout
 const logout = () => {
     router.post(route('logout'));
 };
 
-// Acceder a props globales y usar computed
 const page = usePage();
 const auth = computed(() => page.props.auth);
 </script>
@@ -54,29 +43,8 @@ const auth = computed(() => page.props.auth);
                     </svg>
                 </Link>
 
-                <DropdownMenu>
-                    <DropdownMenuTrigger as-child>
-                        <Button variant="ghost" class="relative h-8 w-8 rounded-full">
-                            <img src="https://via.placeholder.com/50" alt="Avatar"
-                                class="rounded-full h-8 w-8 object-cover">
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent class="w-56" align="end">
-                        <DropdownMenuItem>
-                            <Link :href="route('profile.show', page.props.auth.user.id)">
-                            Perfil
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Link :href="route('profile.edit')">
-                            Ajustes
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem @click="logout" as="button">
-                            Cerrar Sesión
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <NavUser :user="auth.user" />
+
             </template>
         </AppHeader>
 
