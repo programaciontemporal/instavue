@@ -9,6 +9,8 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Gate; // Añadido para Gate/Authorization
+use Illuminate\Support\Facades\Auth; // Asegúrate de que Auth está importado
 
 class PostController extends Controller
 {
@@ -27,20 +29,82 @@ class PostController extends Controller
     {
         try {
             $request->validate([
-                'image' => ['required', 'image', 'max:2048'], // Máximo 2MB
+                'image' => ['required', 'image', 'max:2048'],
                 'caption' => ['nullable', 'string', 'max:255'],
             ]);
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         }
 
-        $imagePath = $request->file('image')->store('uploads', 'public'); // Guarda la imagen en storage/app/public/uploads
+        $imagePath = $request->file('image')->store('uploads', 'public');
 
-        Auth()->user()->posts()->create([
+        Auth::user()->posts()->create([ // Usar Auth::user() en lugar de Auth()
             'caption' => $request->caption,
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('profile.show', ['user' => auth()->user()->id]);
+        return redirect()->route('profile.show', ['user' => auth()->user()->id])->with('success', 'Publicación creada con éxito.');
+    }
+
+    /**
+     * Muestra un post específico.
+     */
+    public function show(Post $post): Response
+    {
+        $post->load(['user', 'comments.user', 'likes']);
+        $post->is_liked_by_auth_user = $post->likes->contains('user_id', auth()->id());
+
+        return Inertia::render('Posts/Show', [
+            'post' => $post,
+            'authUserId' => auth()->id(),
+        ]);
+    }
+
+    /**
+     * Muestra el formulario para editar un post.
+     */
+    public function edit(Post $post): Response
+    {
+        Gate::authorize('update', $post);
+        return Inertia::render('Posts/Edit', [
+            'post' => $post,
+        ]);
+    }
+
+    /**
+     * Actualiza un post existente en la base de datos.
+     */
+    public function update(Request $request, Post $post): RedirectResponse
+    {
+        Gate::authorize('update', $post);
+
+        try {
+            $request->validate([
+                'caption' => ['nullable', 'string', 'max:255'],
+            ]);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        }
+
+        $post->caption = $request->caption;
+        $post->save();
+
+        return redirect()->route('posts.show', $post->id)->with('success', 'Publicación actualizada con éxito.');
+    }
+
+    /**
+     * Elimina un post de la base de datos.
+     */
+    public function destroy(Post $post): RedirectResponse
+    {
+        Gate::authorize('delete', $post);
+
+        if ($post->image_path) {
+            Storage::disk('public')->delete($post->getRawOriginal('image_path'));
+        }
+
+        $post->delete();
+
+        return redirect()->route('profile.show', auth()->user()->id)->with('success', 'Publicación eliminada con éxito.');
     }
 }

@@ -3,9 +3,9 @@ import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import AppHeader from '@/components/AppHeader.vue';
-import NavUser from '@/components/NavUser.vue'; // Importa NavUser.vue
+import NavUser from '@/components/NavUser.vue';
+import Sonner from '@/components/ui/sonner/Sonner.vue'; // Importa el componente Sonner.vue directamente
 
-// Función de logout
 const logout = () => {
     router.post(route('logout'));
 };
@@ -58,4 +58,5 @@ const auth = computed(() => page.props.auth);
             <slot />
         </main>
     </div>
+    <Sonner richColors />
 </template>
