@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Post; // Asegúrate de que esto esté importado
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\RedirectResponse; // Importa RedirectResponse
-use Illuminate\Support\Facades\Storage; // Importa Storage para el manejo de archivos
-use App\Http\Requests\ProfileUpdateRequest; // Importa el ProfileUpdateRequest
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Redirect; // Añadir esta importación si no está
 
 class ProfileController extends Controller
 {
@@ -24,7 +25,6 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user()->hasVerifiedEmail(),
             'status' => session('status'),
-            // Pasa el usuario autenticado con los campos necesarios, incluyendo el avatar
             'user' => $request->user()->only('id', 'name', 'email', 'avatar'),
         ]);
     }
@@ -36,19 +36,14 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        // Si hay un archivo de avatar en la solicitud
         if ($request->hasFile('avatar')) {
-            // Si el usuario ya tiene un avatar y no es el avatar por defecto (opcional, si tienes uno por defecto)
-            // Asumiendo que tus avatares personalizados se guardan en 'uploads/avatars'
             if ($user->avatar && strpos($user->getRawOriginal('avatar'), 'uploads/avatars/') !== false) {
                 Storage::disk('public')->delete($user->getRawOriginal('avatar'));
             }
-            // Guarda el nuevo avatar y actualiza el campo 'avatar' del usuario
             $avatarPath = $request->file('avatar')->store('uploads/avatars', 'public');
             $user->avatar = $avatarPath;
         }
 
-        // Rellena el usuario con los datos validados del request (nombre, email)
         $user->fill($request->validated());
 
         if ($user->isDirty('email')) {
@@ -73,7 +68,6 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        // Eliminar también el avatar si existe
         if ($user->avatar && strpos($user->getRawOriginal('avatar'), 'uploads/avatars/') !== false) {
             Storage::disk('public')->delete($user->getRawOriginal('avatar'));
         }
@@ -93,13 +87,12 @@ class ProfileController extends Controller
     {
         // Cargar las publicaciones del usuario con paginación y relaciones necesarias
         $posts = $user->posts()
-                      ->with(['user', 'likes', 'comments.user']) // Eager load relationships
+                      ->with(['user', 'likes', 'comments.user'])
                       ->latest()
-                      ->paginate(12); // Paginación: 12 posts por página
+                      ->paginate(12);
 
         // Mapear la colección paginada para preparar los datos para el frontend
         $posts->through(function ($post) {
-            // Añadir si el usuario autenticado ha dado like
             $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
             return [
                 'id' => $post->id,
@@ -109,9 +102,8 @@ class ProfileController extends Controller
                 'user' => [
                     'id' => $post->user->id,
                     'name' => $post->user->name,
-                    'avatar' => $post->user->avatar, // Asegúrate de que el modelo User tenga un campo 'avatar'
+                    'avatar' => $post->user->avatar,
                 ],
-                // Solo el ID del usuario para el frontend
                 'likes' => $post->likes->map(fn($like) => ['user_id' => $like->user_id]),
                 'likes_count' => $post->likes->count(),
                 'comments' => $post->comments->map(function ($comment) {
@@ -125,18 +117,17 @@ class ProfileController extends Controller
                         'created_at' => $comment->created_at->diffForHumans(),
                     ];
                 }),
-                'comments_count' => $post->comments->count(),
+                'comments_count' => $comment->comments->count(), // Corregido: antes era $post->comments->count()
                 'is_liked_by_auth_user' => $post->is_liked_by_auth_user,
             ];
         });
 
-        // Contadores de posts, seguidores y seguidos (ya estaban bien)
-        $postsCount = $user->posts()->count();
-        $followersCount = $user->followers()->count();
-        $followingCount = $user->following()->count();
-
-        // Verificar si el usuario autenticado está siguiendo a este perfil
-        $isFollowing = Auth::check() ? Auth::user()->isFollowing($user) : false;
+        // Determinar si el usuario autenticado está siguiendo a este perfil
+        // Si el perfil que se está viendo es el propio del usuario autenticado, no puede seguirse a sí mismo
+        $isFollowingAuthUser = false;
+        if (Auth::check() && Auth::id() !== $user->id) {
+            $isFollowingAuthUser = Auth::user()->isFollowing($user);
+        }
 
         return Inertia::render('Profile/Show', [
             'user' => [
@@ -144,14 +135,14 @@ class ProfileController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'avatar' => $user->avatar,
+                'bio' => $user->bio ?? null, // Asumiendo que User tiene un campo 'bio'
+                'posts_count' => $user->posts()->count(),
+                'followers_count' => $user->followers()->count(),
+                'following_count' => $user->following()->count(),
+                'is_following_auth_user' => $isFollowingAuthUser, // Este será el prop para el frontend
             ],
             'posts' => $posts, // Pasa la colección paginada de posts
-            'postsCount' => $postsCount,
-            'followersCount' => $followersCount,
-            'followingCount' => $followingCount,
-            'isFollowing' => $isFollowing,
-            'canEdit' => Auth::check() && Auth::user()->id === $user->id,
-            'authUserId' => Auth::id(), // Pasar el ID del usuario autenticado
+            'authUserId' => Auth::id(), // Pasa el ID del usuario autenticado
         ]);
     }
 }

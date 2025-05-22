@@ -18,7 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('avatar')->nullable(); // ¡Añadida la columna 'avatar'!
+            $table->string('avatar')->nullable();
+            // ¡Añadida la columna 'bio' aquí!
+            $table->text('bio')->nullable(); // Campo de texto para la biografía, puede ser nulo
             $table->timestamps();
         });
 

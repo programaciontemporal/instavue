@@ -5,37 +5,44 @@ import { computed } from 'vue';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/composables/useInitials';
-import { PencilIcon, PlusSquareIcon } from 'lucide-vue-next'; // Importar iconos de lucide-vue-next
-import PostCard from '@/components/PostCard.vue'; // Asegúrate de importar PostCard
+import { PencilIcon, PlusSquareIcon } from 'lucide-vue-next';
+import PostCard from '@/components/PostCard.vue';
 
 const props = defineProps({
-    user: Object, // Ahora 'posts' es un objeto paginado
-    posts: Object, // Cambiado de Array a Object
-    postsCount: Number,
-    followersCount: Number,
-    followingCount: Number,
-    isFollowing: Boolean,
-    canEdit: Boolean,
-    authUserId: Number, // Nueva prop para el ID del usuario autenticado
+    user: Object, // Datos del usuario del perfil que estamos viendo (incluye bio, contadores, is_following_auth_user)
+    posts: Object, // Publicaciones paginadas de ese usuario
+    authUserId: Number, // ID del usuario autenticado
 });
 
+// Lógica para seguir/dejar de seguir
 const followForm = useForm({});
 
 const toggleFollow = () => {
-    if (props.isFollowing) {
+    // Si el usuario ya está siguiendo, se ejecuta la acción de "dejar de seguir"
+    if (props.user.is_following_auth_user) {
         followForm.delete(route('unfollow', props.user.id), {
-            preserveScroll: true, // Mantener la posición de scroll
+            preserveScroll: true, // Mantener la posición de scroll tras la petición
+            onSuccess: () => {
+                // Actualizar el estado local directamente en la prop 'user'
+                props.user.is_following_auth_user = false;
+                props.user.followers_count--; // Decrementar el contador de seguidores
+            }
         });
     } else {
+        // Si el usuario no está siguiendo, se ejecuta la acción de "seguir"
         followForm.post(route('follow', props.user.id), {
-            preserveScroll: true, // Mantener la posición de scroll
+            preserveScroll: true, // Mantener la posición de scroll tras la petición
+            onSuccess: () => {
+                // Actualizar el estado local directamente en la prop 'user'
+                props.user.is_following_auth_user = true;
+                props.user.followers_count++; // Incrementar el contador de seguidores
+            }
         });
     }
 };
 
-const followButtonText = computed(() => {
-    return props.isFollowing ? 'Dejar de seguir' : 'Seguir';
-});
+// Computada para determinar si el perfil que se está viendo es el del usuario autenticado
+const isOwnProfile = computed(() => props.authUserId === props.user.id);
 </script>
 
 <template>
@@ -59,60 +66,75 @@ const followButtonText = computed(() => {
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ user.name }}</h2>
                             <div class="flex space-x-2">
-                                <Link v-if="canEdit" :href="route('profile.edit')">
-                                <Button variant="outline" class="flex items-center space-x-2">
-                                    <PencilIcon class="h-4 w-4" />
-                                    <span>Editar Perfil</span>
-                                </Button>
+                                <Link v-if="isOwnProfile" :href="route('profile.edit')">
+                                    <Button variant="outline" class="flex items-center space-x-2">
+                                        <PencilIcon class="h-4 w-4" />
+                                        <span>Editar Perfil</span>
+                                    </Button>
                                 </Link>
 
-                                <Button v-if="!canEdit && authUserId" @click="toggleFollow"
-                                        :variant="isFollowing ? 'outline' : 'default'">
-                                    {{ followButtonText }}
+                                <Button v-else-if="authUserId" @click="toggleFollow"
+                                        :variant="user.is_following_auth_user ? 'outline' : 'default'">
+                                    {{ user.is_following_auth_user ? 'Dejar de seguir' : 'Seguir' }}
                                 </Button>
-                                <span v-else-if="!canEdit && !authUserId" class="text-gray-500 text-sm">Inicia sesión para interactuar.</span>
+                                <span v-else class="text-gray-500 text-sm">Inicia sesión para interactuar.</span>
                             </div>
                         </div>
 
                         <div class="flex space-x-6 text-gray-700 dark:text-gray-300 mb-4">
                             <div>
-                                <span class="font-bold">{{ postsCount }}</span> publicaciones
+                                <span class="font-bold">{{ user.posts_count }}</span> publicaciones
                             </div>
                             <div>
-                                <span class="font-bold">{{ followersCount }}</span> seguidores
+                                <span class="font-bold">{{ user.followers_count }}</span> seguidores
                             </div>
                             <div>
-                                <span class="font-bold">{{ followingCount }}</span> seguidos
+                                <span class="font-bold">{{ user.following_count }}</span> seguidos
                             </div>
                         </div>
 
                         <p class="text-gray-700 dark:text-gray-300">{{ user.email }}</p>
+                        <p v-if="user.bio" class="mt-2 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{{ user.bio }}</p>
+                        <p v-else class="mt-2 text-gray-500 dark:text-gray-400">Sin biografía.</p>
                     </div>
                 </div>
 
                 <hr class="my-6 border-gray-200 dark:border-gray-700">
 
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Publicaciones</h3>
+                <h3 v-if="posts.data && posts.data.length > 0" class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
+                    Publicaciones
+                </h3>
                 <div v-if="posts.data && posts.data.length > 0"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <PostCard v-for="post in posts.data" :key="post.id" :post="post" />
                 </div>
                 <div v-else class="text-center text-gray-500 dark:text-gray-400 p-6">
-                    Este usuario aún no tiene publicaciones.
-                    <Link v-if="canEdit" :href="route('posts.create')"
+                    <p>{{ isOwnProfile ? 'Aún no tienes publicaciones.' : `Este usuario aún no tiene publicaciones.` }}</p>
+                    <Link v-if="isOwnProfile" :href="route('posts.create')"
                         class="text-blue-500 hover:underline flex items-center justify-center mt-2">
-                    <PlusSquareIcon class="h-4 w-4 mr-1" />
-                    <span>¡Sé el primero en publicar!</span>
+                        <PlusSquareIcon class="h-4 w-4 mr-1" />
+                        <span>¡Sé el primero en publicar!</span>
                     </Link>
                 </div>
 
                 <div v-if="posts.links && posts.links.length > 3" class="flex justify-center mt-8">
-                    <Link v-for="link in posts.links" :key="link.url"
-                          :href="link.url"
-                          v-html="link.label"
-                          class="px-3 py-1 mx-1 border rounded"
-                          :class="{ 'bg-blue-500 text-white': link.active, 'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active, 'pointer-events-none opacity-50': !link.url }"
-                    />
+                    <template v-for="link in posts.links" :key="link.label">
+                        <Link
+                            v-if="link.url"
+                            :href="link.url"
+                            v-html="link.label"
+                            class="px-3 py-1 mx-1 border rounded"
+                            :class="{
+                                'bg-blue-500 text-white': link.active,
+                                'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active,
+                            }"
+                        />
+                        <span
+                            v-else
+                            v-html="link.label"
+                            class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700"
+                        ></span>
+                    </template>
                 </div>
             </div>
         </div>
