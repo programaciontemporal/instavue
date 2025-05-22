@@ -11,6 +11,7 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\SavedPostController;
+use App\Http\Controllers\SearchController; // Importa el SearchController
 use Illuminate\Support\Facades\Auth;
 
 // Ruta para la página de bienvenida (home)
@@ -66,4 +67,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Ruta para la página de explorar
     Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
+
+    // Rutas de Búsqueda
+    Route::get('/search', [SearchController::class, 'results'])->name('search.results');
 });
+
+// Nota: La ruta de logout está en auth.php, por lo que no es necesario duplicarla aquí.
+// Si no estuviera, se añadiría aquí.
