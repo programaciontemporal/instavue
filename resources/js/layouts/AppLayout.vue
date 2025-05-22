@@ -1,17 +1,16 @@
 <script setup>
-import { Link, router, usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import AppHeader from '@/components/AppHeader.vue';
-import NavUser from '@/components/NavUser.vue';
-import Sonner from '@/components/ui/sonner/Sonner.vue'; // Importa el componente Sonner.vue directamente
-
-const logout = () => {
-    router.post(route('logout'));
-};
+import NavUser from '@/components/NavUser.vue'; // Asegúrate de importar NavUser aquí
+import Sonner from '@/components/ui/sonner/Sonner.vue';
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
+
+// ¡Añade esta línea para depurar el objeto de usuario!
+console.log('Objeto auth.user completo en AppLayout:', auth.value.user);
 </script>
 
 <template>
@@ -42,9 +41,7 @@ const auth = computed(() => page.props.auth);
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </Link>
-
                 <NavUser :user="auth.user" />
-
             </template>
         </AppHeader>
 

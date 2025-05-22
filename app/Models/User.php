@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage; // Asegúrate de que esta línea esté presente
 
 class User extends Authenticatable
 {
@@ -28,6 +28,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Accesor para la URL completa del avatar.
+     * Convierte la cadena vacía a null si no hay avatar.
+     */
+    public function getAvatarAttribute($value)
+    {
+        // Si el valor es una cadena vacía o null, devuelve null.
+        // De lo contrario, genera la URL pública del avatar.
+        return ($value === '' || $value === null) ? null : Storage::url($value);
+    }
 
     public function following()
     {

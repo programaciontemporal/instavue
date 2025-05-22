@@ -4,43 +4,60 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\Post;
+use App\Models\Post; // Asegúrate de que esto esté importado
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse; // Importa RedirectResponse
+use Illuminate\Support\Facades\Storage; // Importa Storage para el manejo de archivos
+use App\Http\Requests\ProfileUpdateRequest; // Importa el ProfileUpdateRequest
 
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the user's profile settings form.
      */
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user()->hasVerifiedEmail(),
             'status' => session('status'),
+            // Pasa el usuario autenticado con los campos necesarios, incluyendo el avatar
+            'user' => $request->user()->only('id', 'name', 'email', 'avatar'),
         ]);
     }
 
     /**
-     * Update the user's profile information.
+     * Update the user's profile information and avatar.
      */
-    public function update(Request $request): \Illuminate\Http\RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validate([
-            'name' => 'required|string|max:255',
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($request->user()->id)],
-        ]));
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Si hay un archivo de avatar en la solicitud
+        if ($request->hasFile('avatar')) {
+            // Si el usuario ya tiene un avatar y no es el avatar por defecto (opcional, si tienes uno por defecto)
+            // Asumiendo que tus avatares personalizados se guardan en 'uploads/avatars'
+            if ($user->avatar && strpos($user->getRawOriginal('avatar'), 'uploads/avatars/') !== false) {
+                Storage::disk('public')->delete($user->getRawOriginal('avatar'));
+            }
+            // Guarda el nuevo avatar y actualiza el campo 'avatar' del usuario
+            $avatarPath = $request->file('avatar')->store('uploads/avatars', 'public');
+            $user->avatar = $avatarPath;
         }
 
-        $request->user()->save();
+        // Rellena el usuario con los datos validados del request (nombre, email)
+        $user->fill($request->validated());
 
-        return back();
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('success', 'Perfil actualizado con éxito.');
     }
 
     /**
@@ -55,6 +72,11 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
+
+        // Eliminar también el avatar si existe
+        if ($user->avatar && strpos($user->getRawOriginal('avatar'), 'uploads/avatars/') !== false) {
+            Storage::disk('public')->delete($user->getRawOriginal('avatar'));
+        }
 
         $user->delete();
 
