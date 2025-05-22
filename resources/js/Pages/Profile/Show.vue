@@ -6,24 +6,30 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/composables/useInitials';
 import { PencilIcon, PlusSquareIcon } from 'lucide-vue-next'; // Importar iconos de lucide-vue-next
+import PostCard from '@/components/PostCard.vue'; // Asegúrate de importar PostCard
 
 const props = defineProps({
-    user: Object,
-    posts: Array,
+    user: Object, // Ahora 'posts' es un objeto paginado
+    posts: Object, // Cambiado de Array a Object
     postsCount: Number,
     followersCount: Number,
     followingCount: Number,
     isFollowing: Boolean,
     canEdit: Boolean,
+    authUserId: Number, // Nueva prop para el ID del usuario autenticado
 });
 
 const followForm = useForm({});
 
 const toggleFollow = () => {
     if (props.isFollowing) {
-        followForm.delete(route('unfollow', props.user.id));
+        followForm.delete(route('unfollow', props.user.id), {
+            preserveScroll: true, // Mantener la posición de scroll
+        });
     } else {
-        followForm.post(route('follow', props.user.id));
+        followForm.post(route('follow', props.user.id), {
+            preserveScroll: true, // Mantener la posición de scroll
+        });
     }
 };
 
@@ -59,10 +65,12 @@ const followButtonText = computed(() => {
                                     <span>Editar Perfil</span>
                                 </Button>
                                 </Link>
-                                <Button v-if="!canEdit" @click="toggleFollow"
-                                    :variant="isFollowing ? 'outline' : 'default'">
+
+                                <Button v-if="!canEdit && authUserId" @click="toggleFollow"
+                                        :variant="isFollowing ? 'outline' : 'default'">
                                     {{ followButtonText }}
                                 </Button>
+                                <span v-else-if="!canEdit && !authUserId" class="text-gray-500 text-sm">Inicia sesión para interactuar.</span>
                             </div>
                         </div>
 
@@ -85,44 +93,26 @@ const followButtonText = computed(() => {
                 <hr class="my-6 border-gray-200 dark:border-gray-700">
 
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Publicaciones</h3>
-                <div v-if="posts.length > 0"
+                <div v-if="posts.data && posts.data.length > 0"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div v-for="post in posts" :key="post.id"
-                        class="relative group aspect-square overflow-hidden rounded-lg shadow-md">
-                        <Link :href="route('posts.show', post.id)">
-                            <img :src="post.image_path" :alt="post.caption"
-                                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                            <div
-                                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div class="flex space-x-4 text-white font-bold">
-                                    <div class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.815 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                                        </svg>
-                                        <span>{{ post.likes_count }}</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.756 3 12.25c0 1.993.826 3.89 2.245 5.31l-.224.224H3.75a.75.75 0 0 0-.53 1.28L6.75 21l3.5-3.5a.75.75 0 0 0-.53-1.28H7.756c-1.42-.82-2.245-2.317-2.245-4.01V12.25c0-3.036 2.69-5.5 6-5.5s6 2.464 6 5.5-2.69 5.5-6 5.5Z" />
-                                        </svg>
-                                        <span>{{ post.comments_count }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
+                    <PostCard v-for="post in posts.data" :key="post.id" :post="post" />
                 </div>
-                <div v-else class="text-center text-gray-500 dark:text-gray-400">
+                <div v-else class="text-center text-gray-500 dark:text-gray-400 p-6">
                     Este usuario aún no tiene publicaciones.
                     <Link v-if="canEdit" :href="route('posts.create')"
                         class="text-blue-500 hover:underline flex items-center justify-center mt-2">
                     <PlusSquareIcon class="h-4 w-4 mr-1" />
                     <span>¡Sé el primero en publicar!</span>
                     </Link>
+                </div>
+
+                <div v-if="posts.links && posts.links.length > 3" class="flex justify-center mt-8">
+                    <Link v-for="link in posts.links" :key="link.url"
+                          :href="link.url"
+                          v-html="link.label"
+                          class="px-3 py-1 mx-1 border rounded"
+                          :class="{ 'bg-blue-500 text-white': link.active, 'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active, 'pointer-events-none opacity-50': !link.url }"
+                    />
                 </div>
             </div>
         </div>
