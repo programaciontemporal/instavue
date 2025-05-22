@@ -117,7 +117,7 @@ class ProfileController extends Controller
                         'created_at' => $comment->created_at->diffForHumans(),
                     ];
                 }),
-                'comments_count' => $comment->comments->count(), // Corregido: antes era $post->comments->count()
+                'comments_count' => $post->comments->count(), // ¡Ahora sí corregido DEFINITIVAMENTE!
                 'is_liked_by_auth_user' => $post->is_liked_by_auth_user,
             ];
         });
