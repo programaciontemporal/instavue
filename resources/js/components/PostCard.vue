@@ -1,16 +1,16 @@
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3';
-import { computed } from 'vue'; // Importar computed
-import { Button } from '@/components/ui/button'; // Asegúrate de tener este componente si lo usas
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Asegúrate de tener estos componentes si los usas
-import { getInitials } from '@/composables/useInitials'; // Asegúrate de tener este composable si lo usas
-import { HeartIcon, MessageCircleIcon, BookmarkIcon } from 'lucide-vue-next'; // Importar iconos necesarios
+import { computed } from 'vue';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getInitials } from '@/composables/useInitials';
+import { HeartIcon, MessageCircleIcon, BookmarkIcon } from 'lucide-vue-next';
 
 const props = defineProps({
-    post: Object, // El objeto post incluye is_liked_by_auth_user y is_saved_by_auth_user
+    post: Object,
     authUserId: {
         type: Number,
-        default: null, // Puede ser nulo si no hay usuario autenticado
+        default: null,
     },
 });
 
@@ -70,7 +70,9 @@ const toggleSave = () => {
 
 // Lógica para el avatar del usuario
 const userAvatarUrl = computed(() => {
-    return props.post.user.avatar || '/images/default-avatar.png'; // Ruta por defecto para el avatar
+    // Si props.post.user.avatar es null o una cadena vacía, AvatarImage simplemente no mostrará nada,
+    // y AvatarFallback se encargará de mostrar las iniciales.
+    return props.post.user.avatar;
 });
 </script>
 

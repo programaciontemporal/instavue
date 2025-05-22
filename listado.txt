@@ -1,0 +1,1900 @@
+
+    Directory: C:\wamp64\www\instavue
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d--h-          22/05/2025    21:38                .git
+d----          21/05/2025    14:16                .github
+d----          22/05/2025    13:32                app
+d----          22/05/2025    13:32                bootstrap
+d----          22/05/2025    13:32                config
+d----          22/05/2025    13:32                database
+d----          22/05/2025    22:24                public
+d----          22/05/2025    13:32                resources
+d----          22/05/2025    21:05                routes
+d----          22/05/2025    13:32                storage
+d----          22/05/2025    13:32                tests
+-a---          22/05/2025    13:32            258 .editorconfig
+-a---          22/05/2025    13:42           1130 .env
+-a---          22/05/2025    13:32           1084 .env.example
+-a---          22/05/2025    13:32            160 .gitattributes
+-a---          22/05/2025    13:32            301 .gitignore
+-a---          22/05/2025    13:32             74 .prettierignore
+-a---          22/05/2025    13:32            438 .prettierrc
+-a---          22/05/2025    13:32            425 artisan
+-a---          22/05/2025    13:32            511 components.json
+-a---          22/05/2025    13:32           2955 composer.json
+-a---          22/05/2025    13:32         384003 composer.lock
+-a---          22/05/2025    13:32            581 eslint.config.js
+-a---          22/05/2025    22:25              0 listado.txt
+-a---          22/05/2025    22:17         208367 package-lock.json
+-a---          22/05/2025    21:44           1760 package.json
+-a---          22/05/2025    13:32           1173 phpunit.xml
+-a---          22/05/2025    13:32             81 settings.json
+-a---          22/05/2025    13:32          12813 tsconfig.json
+-a---          22/05/2025    13:32            873 vite.config.ts
+
+    Directory: C:\wamp64\www\instavue\.git
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          21/05/2025    14:16                hooks
+d----          21/05/2025    14:16                info
+d----          21/05/2025    14:16                logs
+d----          22/05/2025    22:22                objects
+d----          21/05/2025    14:16                refs
+-a---          22/05/2025    21:38             73 COMMIT_EDITMSG
+-a---          21/05/2025    14:18            377 config
+-a---          21/05/2025    14:16             73 description
+-a---          22/05/2025    22:22            108 FETCH_HEAD
+-a---          21/05/2025    14:16             21 HEAD
+-a---          22/05/2025    21:38          34816 index
+-a---          22/05/2025    21:18             41 ORIG_HEAD
+-a---          21/05/2025    14:16            112 packed-refs
+
+    Directory: C:\wamp64\www\instavue\.git\hooks
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          21/05/2025    14:16            478 applypatch-msg.sample
+-a---          21/05/2025    14:16            896 commit-msg.sample
+-a---          21/05/2025    14:16           4726 fsmonitor-watchman.sample
+-a---          21/05/2025    14:16            189 post-update.sample
+-a---          21/05/2025    14:16            424 pre-applypatch.sample
+-a---          21/05/2025    14:16           1649 pre-commit.sample
+-a---          21/05/2025    14:16            416 pre-merge-commit.sample
+-a---          21/05/2025    14:16           1374 pre-push.sample
+-a---          21/05/2025    14:16           4898 pre-rebase.sample
+-a---          21/05/2025    14:16            544 pre-receive.sample
+-a---          21/05/2025    14:16           1492 prepare-commit-msg.sample
+-a---          21/05/2025    14:16           2783 push-to-checkout.sample
+-a---          21/05/2025    14:16           2308 sendemail-validate.sample
+-a---          21/05/2025    14:16           3650 update.sample
+
+    Directory: C:\wamp64\www\instavue\.git\info
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          21/05/2025    14:16            240 exclude
+
+    Directory: C:\wamp64\www\instavue\.git\logs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          21/05/2025    14:16                refs
+-a---          22/05/2025    21:38           1028 HEAD
+
+    Directory: C:\wamp64\www\instavue\.git\logs\refs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          21/05/2025    14:16                heads
+d----          21/05/2025    14:16                remotes
+
+    Directory: C:\wamp64\www\instavue\.git\logs\refs\heads
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:38           1028 main
+
+    Directory: C:\wamp64\www\instavue\.git\logs\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    12:30                origin
+
+    Directory: C:\wamp64\www\instavue\.git\logs\refs\remotes\origin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          21/05/2025    14:16            218 HEAD
+-a---          22/05/2025    21:18            514 main
+
+    Directory: C:\wamp64\www\instavue\.git\objects
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:38                00
+d----          22/05/2025    12:30                01
+d----          22/05/2025    21:38                02
+d----          22/05/2025    12:30                04
+d----          22/05/2025    21:38                08
+d----          22/05/2025    21:05                09
+d----          22/05/2025    21:05                0a
+d----          22/05/2025    12:30                0b
+d----          22/05/2025    12:30                0d
+d----          22/05/2025    21:05                0e
+d----          22/05/2025    21:05                11
+d----          22/05/2025    21:05                13
+d----          22/05/2025    21:05                15
+d----          22/05/2025    12:30                19
+d----          22/05/2025    12:30                1b
+d----          22/05/2025    21:05                21
+d----          22/05/2025    21:38                23
+d----          22/05/2025    21:38                24
+d----          22/05/2025    12:30                28
+d----          22/05/2025    21:05                29
+d----          22/05/2025    12:30                2a
+d----          22/05/2025    21:38                2c
+d----          22/05/2025    12:30                2e
+d----          22/05/2025    21:05                2f
+d----          22/05/2025    12:30                31
+d----          22/05/2025    21:05                33
+d----          22/05/2025    21:05                39
+d----          22/05/2025    21:05                3a
+d----          22/05/2025    21:05                3b
+d----          22/05/2025    21:38                3d
+d----          22/05/2025    21:05                3e
+d----          22/05/2025    21:05                3f
+d----          22/05/2025    21:05                42
+d----          22/05/2025    21:05                43
+d----          22/05/2025    21:05                44
+d----          22/05/2025    21:05                46
+d----          22/05/2025    21:05                47
+d----          22/05/2025    21:05                4b
+d----          22/05/2025    21:38                4e
+d----          22/05/2025    21:05                50
+d----          22/05/2025    21:05                51
+d----          22/05/2025    12:30                52
+d----          22/05/2025    21:05                56
+d----          22/05/2025    21:05                57
+d----          22/05/2025    21:05                58
+d----          22/05/2025    21:05                5c
+d----          22/05/2025    21:38                5d
+d----          22/05/2025    21:05                5f
+d----          22/05/2025    21:05                60
+d----          22/05/2025    21:38                61
+d----          22/05/2025    12:30                64
+d----          22/05/2025    21:05                65
+d----          22/05/2025    21:05                66
+d----          22/05/2025    21:05                67
+d----          22/05/2025    21:38                68
+d----          22/05/2025    21:05                6b
+d----          22/05/2025    21:38                72
+d----          22/05/2025    21:05                79
+d----          22/05/2025    12:30                7a
+d----          22/05/2025    12:30                7b
+d----          22/05/2025    21:05                7c
+d----          22/05/2025    21:05                7d
+d----          22/05/2025    21:05                7e
+d----          22/05/2025    21:05                7f
+d----          22/05/2025    12:30                80
+d----          22/05/2025    21:18                82
+d----          22/05/2025    21:05                83
+d----          22/05/2025    21:38                84
+d----          22/05/2025    12:30                8a
+d----          22/05/2025    21:18                8d
+d----          22/05/2025    21:05                8f
+d----          22/05/2025    21:05                93
+d----          22/05/2025    21:05                94
+d----          22/05/2025    21:38                95
+d----          22/05/2025    21:05                96
+d----          22/05/2025    21:05                98
+d----          22/05/2025    21:05                9a
+d----          22/05/2025    12:30                9b
+d----          22/05/2025    21:05                9c
+d----          22/05/2025    21:05                9d
+d----          22/05/2025    21:38                9f
+d----          22/05/2025    21:05                a0
+d----          22/05/2025    21:38                a2
+d----          22/05/2025    21:38                a5
+d----          22/05/2025    12:30                a7
+d----          22/05/2025    21:05                a8
+d----          22/05/2025    21:05                a9
+d----          22/05/2025    21:05                ac
+d----          22/05/2025    12:30                b1
+d----          22/05/2025    21:05                b2
+d----          22/05/2025    21:05                b3
+d----          22/05/2025    21:05                b5
+d----          22/05/2025    21:18                b6
+d----          22/05/2025    12:30                b9
+d----          22/05/2025    12:30                bd
+d----          22/05/2025    21:18                be
+d----          22/05/2025    21:05                c3
+d----          22/05/2025    21:05                c4
+d----          22/05/2025    12:30                c5
+d----          22/05/2025    21:05                c6
+d----          22/05/2025    12:30                c7
+d----          22/05/2025    21:05                c8
+d----          22/05/2025    12:30                cb
+d----          22/05/2025    21:05                cd
+d----          22/05/2025    21:05                ce
+d----          22/05/2025    21:38                cf
+d----          22/05/2025    12:30                d0
+d----          22/05/2025    21:05                d2
+d----          22/05/2025    21:05                d5
+d----          22/05/2025    12:30                d6
+d----          22/05/2025    21:05                d9
+d----          22/05/2025    21:38                db
+d----          22/05/2025    21:38                dc
+d----          22/05/2025    12:30                de
+d----          22/05/2025    21:05                df
+d----          22/05/2025    21:38                e0
+d----          22/05/2025    12:30                e3
+d----          22/05/2025    12:30                e6
+d----          22/05/2025    21:05                e8
+d----          22/05/2025    21:05                ea
+d----          22/05/2025    21:38                eb
+d----          22/05/2025    21:38                f0
+d----          22/05/2025    12:30                f1
+d----          22/05/2025    21:05                f2
+d----          22/05/2025    12:30                f3
+d----          22/05/2025    21:05                f4
+d----          22/05/2025    21:18                f5
+d----          22/05/2025    21:05                f6
+d----          22/05/2025    21:05                f8
+d----          22/05/2025    21:05                fa
+d----          22/05/2025    21:05                fb
+d----          21/05/2025    14:16                info
+d----          21/05/2025    14:16                pack
+
+    Directory: C:\wamp64\www\instavue\.git\objects\00
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            478 a1e263945e8abc3785266045610cbcca5861b4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\01
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           2451 0c919af265950b707f8dff99ca5932d6a80059
+
+    Directory: C:\wamp64\www\instavue\.git\objects\02
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38           1002 f42837d5f56a0c6a12d8237ccda84824da054e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\04
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            187 70e82cacb3b19fb3b0fb58e1488287e6dfcb32
+
+    Directory: C:\wamp64\www\instavue\.git\objects\08
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            142 dd95eed3d4524b507a8968be83a037537fb86d
+-ar--          22/05/2025    21:38            156 e4674f59361b5d2cc73cb08dffe4ee5b093843
+
+    Directory: C:\wamp64\www\instavue\.git\objects\09
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            156 7be036afd2476cad3a3f3502b719211e733f9a
+
+    Directory: C:\wamp64\www\instavue\.git\objects\0a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1131 1b0d5e32919855d186509cff61012f1ad7795e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\0b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           1142 7717d86e7553872038c95865a9cf65b678ec61
+-ar--          22/05/2025    12:30            147 a0778f152572efc9aa8312b78e4b9fd4391c6c
+
+    Directory: C:\wamp64\www\instavue\.git\objects\0d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30             66 4a6423d0fea021b952568ca19187aa2c5d7584
+
+    Directory: C:\wamp64\www\instavue\.git\objects\0e
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1061 273182e57859fe4c92d3a4b90eacc12fad3f8c
+-ar--          22/05/2025    21:05            329 94418cc44dd5e502a47e85925c75bf0148bd06
+-ar--          22/05/2025    21:05             98 eff10e81bd58920523a0aa1f771f32571680bc
+
+    Directory: C:\wamp64\www\instavue\.git\objects\11
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            183 7326d080f270fed0280fa0f01845f4e425be9d
+
+    Directory: C:\wamp64\www\instavue\.git\objects\13
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            174 b16b3749b0a22efb98f3d3f023f9af0b1ca7c7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\15
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            142 5134185dd34810261f4f8b21035c4cc7e55c14
+
+    Directory: C:\wamp64\www\instavue\.git\objects\19
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            101 f168997e5af8c32d95c5679d67b5b39ac7add1
+
+    Directory: C:\wamp64\www\instavue\.git\objects\1b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            870 3326d62cf26e452dda471b61b2afd9eaddc8c4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\21
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05             98 21dab028f9797b8a01a22ac6ab087a2159f048
+
+    Directory: C:\wamp64\www\instavue\.git\objects\23
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            901 2e0e429b4fe57d275f7e3d0f6e0a58abe09ab7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\24
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            411 57d30f3080c62ae9940b147e036de28788975a
+
+    Directory: C:\wamp64\www\instavue\.git\objects\28
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30             59 fd15a5b67c5d1b19aee4f68276d1f3b8fc6188
+
+    Directory: C:\wamp64\www\instavue\.git\objects\29
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            178 60bb420c52357e6495b7b6ee9ec3a18a9bbec7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\2a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            101 9a870ffbcf2fa93b6eefb8bdeeb37a6e7d2915
+-ar--          22/05/2025    12:30            173 cddc7603dfeecb82b9518a00818dafa0199c91
+
+    Directory: C:\wamp64\www\instavue\.git\objects\2c
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            574 1363dd1073351c3e5f768cac3265bba16b9f9a
+-ar--          22/05/2025    12:30            402 165d5ce6a0781d194e1e89c98548419bb006e0
+-ar--          22/05/2025    21:38            100 a55c4f6b09f047ceda273fc77b50dbd4e55de2
+-ar--          22/05/2025    21:05            100 a63e5e9dbe314ffb13119774d312977b19b4f1
+
+    Directory: C:\wamp64\www\instavue\.git\objects\2e
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            101 22f15a6f6f5bda63926904045f52842ec763cc
+-ar--          22/05/2025    12:30           2423 8d047e8a163f7a6fc5a66958413e6b1e779e49
+
+    Directory: C:\wamp64\www\instavue\.git\objects\2f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1023 0e7efc71ddeddcabe92619c17825303f62aafa
+-ar--          22/05/2025    21:05            786 54b1348ebad12bd980fcfa3c27c2b2e2d983ef
+-ar--          22/05/2025    21:05            121 977dcd74a3e92680dc0109e99eb9b3404f19a7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\31
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            118 c6c0ba455c8364dc3a9760117dce525c35c38b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\33
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            156 a06a0e42c42aa55914a164c5bd1c56e5ed0a3d
+
+    Directory: C:\wamp64\www\instavue\.git\objects\39
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            363 1bca582f94daaaed09c101ae02373e94c7f199
+
+    Directory: C:\wamp64\www\instavue\.git\objects\3a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            886 8ad9cf9060347a8e302fde9001938bef3eda79
+
+    Directory: C:\wamp64\www\instavue\.git\objects\3b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05             69 088a403c18d0d5049b0ce5e308ea2d79c9523b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\3d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            118 5773212287a0d599c2e2b6d3d594086b5c3d8d
+
+    Directory: C:\wamp64\www\instavue\.git\objects\3e
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            962 bfd4f692f411764f822495bb3a213d88e92428
+
+    Directory: C:\wamp64\www\instavue\.git\objects\3f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            537 18727cd9b7f91a837ece5b6de7338918e71e10
+
+    Directory: C:\wamp64\www\instavue\.git\objects\42
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            961 62c1371f049ae4a22d1ca1c4d2e61cba39cb4f
+
+    Directory: C:\wamp64\www\instavue\.git\objects\43
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            100 d023b2be8d7ab41902203aeef0a8378cb51ce8
+-ar--          22/05/2025    21:05            961 f1e930125e76950606cfbebc89463f0a1e9f78
+
+    Directory: C:\wamp64\www\instavue\.git\objects\44
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           2156 16f6cca1208d6212c2780f3f9b7b9499fa7c36
+-ar--          22/05/2025    21:05            870 207f9c78a3ce81470640e764da0ccf50646c18
+
+    Directory: C:\wamp64\www\instavue\.git\objects\46
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1052 df2f8b4d5ceb5f28d48e909245552d487aedec
+
+    Directory: C:\wamp64\www\instavue\.git\objects\47
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            147 bc575776836f21b6e1739fda88074f548d8ea3
+-ar--          22/05/2025    12:30            142 d06298e9613af29a4b72964bd374119bd0e1bb
+
+    Directory: C:\wamp64\www\instavue\.git\objects\4b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            180 a591cd60fcbccc639d42c7762f1ac8c53ce2d5
+-ar--          22/05/2025    12:30            117 e6ddb508bcbb1dfb1d4d4563ab05ec71886258
+
+    Directory: C:\wamp64\www\instavue\.git\objects\4e
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            147 f44ba4f770d51adc6c4624d4f998efa78d5367
+
+    Directory: C:\wamp64\www\instavue\.git\objects\50
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            897 6d5f7cc28ce14938b59b00569478fa8aa6d91c
+
+    Directory: C:\wamp64\www\instavue\.git\objects\51
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            121 f515362eb650f23ed7eef51e65e6422fe43a55
+
+    Directory: C:\wamp64\www\instavue\.git\objects\52
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            100 5393bec849a5ab1d6525d94dd221755416fae1
+-ar--          22/05/2025    12:30            830 8a57b32de309d1b51679d44938c9c51ca10c84
+
+    Directory: C:\wamp64\www\instavue\.git\objects\56
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05             56 793971028a19018f9192f72a88f144a21f13c5
+
+    Directory: C:\wamp64\www\instavue\.git\objects\57
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1042 d24c7277cf5fd7d204781fada2bffbf6945dd8
+
+    Directory: C:\wamp64\www\instavue\.git\objects\58
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            120 1feaf8c45b0dfb4c2a12d6f72fa7e514ea6304
+-ar--          22/05/2025    21:05             56 31876e7288886f04d5cff4dccc44b8306087d5
+
+    Directory: C:\wamp64\www\instavue\.git\objects\5c
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            142 32d147f77690bf4bb43b9e460d8304286e6fe7
+-ar--          22/05/2025    21:05            100 39fcf99b044aea02699185d8f11642f5202af9
+
+    Directory: C:\wamp64\www\instavue\.git\objects\5d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            330 9f0b26205bfa4407df8657b0ef858b7d76154a
+
+    Directory: C:\wamp64\www\instavue\.git\objects\5f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            887 383b473254bcc80fd17594e97426277f2eb691
+
+    Directory: C:\wamp64\www\instavue\.git\objects\60
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            175 edfdb7fbd8a2120e06d4d5c3debf519acf48b6
+
+    Directory: C:\wamp64\www\instavue\.git\objects\61
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            869 e2ad77992d2f5e4d842a881b406136f83e987c
+-ar--          22/05/2025    21:38            121 f6760edeaa7d79888159c8382bed2fc1a9a644
+
+    Directory: C:\wamp64\www\instavue\.git\objects\64
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           2445 d032274aa17101862df64073ff310505cd825b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\65
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30             57 7c3a67182ff513033f3592ae9994b2bdea072b
+-ar--          22/05/2025    21:05             98 b863061145419230d5d4088cfeb548f3a3225c
+
+    Directory: C:\wamp64\www\instavue\.git\objects\66
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            100 27d2aedc47f5b324109bbabf4a41a6ba8a82a9
+
+    Directory: C:\wamp64\www\instavue\.git\objects\67
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            596 0cc57d60784044095fbf8371757d77ab8f2116
+
+    Directory: C:\wamp64\www\instavue\.git\objects\68
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            339 7108c3b9d64986c2821be31d909bdbf64fa205
+-ar--          22/05/2025    21:18             98 7384bfda0beaea7ce3be6b3723ebbe685246a0
+-ar--          22/05/2025    21:38            143 b182b387044da1d7e664b2309a0191ae8574f4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\6b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            100 af3b39eb0d5305417c7ba0956c5fe97b71a407
+-ar--          22/05/2025    12:30            894 b58d3633b56c7a0328de16006aa425e5739e87
+-ar--          22/05/2025    21:05            960 c653388b5c74c361ddf690ef339018f76dc6a9
+
+    Directory: C:\wamp64\www\instavue\.git\objects\72
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            201 f250c39879ca17892150309d24256aa0296582
+
+    Directory: C:\wamp64\www\instavue\.git\objects\79
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            820 2194b9b8c65ee9a277239e964fc5c9e1d2a8cd
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           2201 6ea923ad0f993463929625763cc94a64776aad
+-ar--          22/05/2025    12:30            305 e40f1a6bcd9976c0737425d45534c4b08f7353
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            172 41d97f8dd0029011a8e7a51c953c40144cfc25
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7c
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            304 5f995ea468cc4334b4394aaae5ef19c41526f4
+-ar--          22/05/2025    21:05             78 c61b6db6e615c20fda5501b69ce985f4ffc72e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            143 ee1a7060e8dddb18a7662eb2d931de3aec4a01
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7e
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1988 0b960d25f5009c8f2cdaac1adebd6caca2b25d
+-ar--          22/05/2025    12:30          48901 e914498f7834b8434d22a4c864d9206e6eaace
+
+    Directory: C:\wamp64\www\instavue\.git\objects\7f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1118 4a18e8a3701e6ce50664b8dbafcea4cbbf8e78
+-ar--          22/05/2025    12:30            666 b91a0f3cfb5e4da86b88ae1f6703c9074b7c23
+
+    Directory: C:\wamp64\www\instavue\.git\objects\80
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            121 8286e8c953cf2da2ddd10efe306b1583130ce3
+
+    Directory: C:\wamp64\www\instavue\.git\objects\82
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            267 38d87abf66166ea43e19cbeff174d2b8180f6a
+-ar--          22/05/2025    21:18            121 befe67ce6ab11c249bc4c14eba11a372b37990
+
+    Directory: C:\wamp64\www\instavue\.git\objects\83
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            120 13fb49c8c24556e67e827de8326b2fb9f70fee
+-ar--          22/05/2025    21:05            467 410a403c6aff7c52715dfe9bf8273a13bdedc0
+
+    Directory: C:\wamp64\www\instavue\.git\objects\84
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            825 13d56bb633d2f4b830f764f8b2ac6224fff65e
+-ar--          22/05/2025    21:38           1041 50ec6d7579c52f42efac6b71c1f06c69904574
+
+    Directory: C:\wamp64\www\instavue\.git\objects\8a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            654 dcce328de38ab422d419bc3c339a97e666eeb5
+
+    Directory: C:\wamp64\www\instavue\.git\objects\8d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:18            870 06dcd21d00edda1093a85c0bab325bcd59ac57
+-ar--          22/05/2025    12:30            304 5adfab877115818a623a5fe4d21410c198d098
+-ar--          22/05/2025    12:30            236 6577ec45fdf49d49a782b2c4ad3b10dd605241
+
+    Directory: C:\wamp64\www\instavue\.git\objects\8f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            101 2929a5fd0347e22ad2c14ce01bde36c4816111
+
+    Directory: C:\wamp64\www\instavue\.git\objects\93
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            870 604453abc1612fa3ed49a4e1a109dea4fbe3e3
+-ar--          22/05/2025    21:05           1256 b33aebc9b96040967888f388fae098e3c80fd2
+
+    Directory: C:\wamp64\www\instavue\.git\objects\94
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            868 9f6b79748062f9153089702247aeebb9f063b4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\95
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            329 04ff30e20aa53fb614b608172ff92635627ba4
+-ar--          22/05/2025    21:05           2262 d0706af33f490bee51f1906e75fc5a632eb92b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\96
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            537 61615580e33311bca4cb6dae822f77ece38355
+
+    Directory: C:\wamp64\www\instavue\.git\objects\98
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            236 0a85113233521adb62e003d234e0f79c56f8f9
+-ar--          22/05/2025    21:05            173 5e28b6eb5c377d94a1964dacc66f0d099525c4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\9a
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            329 b86e9f53ae2583fcff91f93f673364915947b9
+
+    Directory: C:\wamp64\www\instavue\.git\objects\9b
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30             86 ac144b946cba78c4e51d8ae02dfada551a97db
+
+    Directory: C:\wamp64\www\instavue\.git\objects\9c
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            118 2fcc34d14d3c97df8106436ea331935ab754ee
+-ar--          22/05/2025    21:05            519 8b356f1e1a2edbdaf5c0d91b77f3083e34e372
+
+    Directory: C:\wamp64\www\instavue\.git\objects\9d
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            996 46a1d7c63c5a2dc999124efe65c236333dad04
+
+    Directory: C:\wamp64\www\instavue\.git\objects\9f
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:18            143 93c73e1a554eb66d234da9081c89c59cc5687e
+-ar--          22/05/2025    21:38            960 b0fd0be0c079990c69e2084ad31ce6047d1104
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1824 e2602b89f97df9e67234211b6b067483225f19
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a2
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1391 37e5fa5d215769e97214c51253e3d4cadc0d22
+-ar--          22/05/2025    21:05            870 55f511a40f764f05e3f85d58b43e3d313519d4
+-ar--          22/05/2025    21:38            870 6af2ad719cfa271cca2e74f93006769b6db43c
+-ar--          22/05/2025    21:38           1149 7fc786b0e6d5ba99dc8250b6385af857d96b0b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a5
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            339 2f1237a1e086dc54ceb69e27ed6f494016d404
+-ar--          22/05/2025    21:38            369 9164f850341a12619d64f6f5b55ea1cd04b10d
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a7
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            174 1256123c8c135077c216f8a1f6dc7334dd7fae
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a8
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            267 22c9e7ca28a64f628c70d073f67e8867bca4fa
+-ar--          22/05/2025    21:05            291 73ac44f616fc60726c5038166e7893d930c639
+
+    Directory: C:\wamp64\www\instavue\.git\objects\a9
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            266 46eca4e0481fa2d918769bd4ebc556d7b2bd54
+
+    Directory: C:\wamp64\www\instavue\.git\objects\ac
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            147 dac6d3611039b571857cee43374da6d9f9c2e7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            478 8b55a3a73903c9e2fa9a1390873ae6d89c975e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b2
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            340 b54b5bf356cc4ce04fe3a75b6df6a8a81cbf1a
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b3
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            329 03e97bb6e547fcf8e0a51fe21615980a59b3b2
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b5
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            300 5fdb16f457b314711545350d65d4837d51182e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:18           1837 68643803bcd772872af74e25146cfcd8308372
+
+    Directory: C:\wamp64\www\instavue\.git\objects\b9
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           1328 79e7855fd4bd47ac3b5f2889efea1d4833071b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\bd
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            870 716baf948424fbf4e1c84e1540a8ee23c98f05
+
+    Directory: C:\wamp64\www\instavue\.git\objects\be
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:18            175 7258a71b0ebf0d1c97f015e8c9ddd1ae035bf8
+-ar--          22/05/2025    21:05            121 82d5568b38fb4887417032f7cb0f191b25554b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c3
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            121 fba108bb82536897bbedfd2adeecaff0320521
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c4
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            870 5ce03e56d8924124dbec45183ea1c36fa2f1fb
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c5
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            997 9f5a9094ee7f4abb4f0b2d30e28d8c2bd41e21
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1645 9adfe623c700e7eb7310ecc838aa1bb5397a37
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c7
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            117 72a97996bfdef4a29c04b44cb309d4b99cffd4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\c8
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            339 2736f42922ef4bd9253694977326ea878454c0
+-ar--          22/05/2025    12:30           1553 aa3f4829e3dec8146ec89f5a943281173f30d4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\cb
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            142 01bce2b02b26526a211653519d184d5d1c3d8c
+-ar--          22/05/2025    12:30           1137 b3a3e3602290c0293f5b12cc15b488a29aa19b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\cd
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            301 8e2d95c065ce621b3a151b46280fe4b3b40df4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\ce
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            175 880bfbcd38d09b1003637e50a02c2892e9dc74
+-ar--          22/05/2025    21:05            171 deddfc254da88791809c583ccf86b4706202e5
+
+    Directory: C:\wamp64\www\instavue\.git\objects\cf
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38           1689 0851105130648980006ae4909eff8edd17aa5d
+
+    Directory: C:\wamp64\www\instavue\.git\objects\d0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            168 e7c53d09699be32b249288a6a98f7cc6f1d56b
+
+    Directory: C:\wamp64\www\instavue\.git\objects\d2
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1639 72eb37f9185b8df811b3c8ad6720f1efd5c06a
+
+    Directory: C:\wamp64\www\instavue\.git\objects\d5
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            789 1f1809625823778e5f64e29268e23932fa5385
+
+    Directory: C:\wamp64\www\instavue\.git\objects\d6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            292 552d4ac6dd8cebbbf1babc44a8dcca9fc17fc6
+
+    Directory: C:\wamp64\www\instavue\.git\objects\d9
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            292 e75278aace838c7f1de882750fccd7dd57c806
+
+    Directory: C:\wamp64\www\instavue\.git\objects\db
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            453 a645677baf6c521966e4c4ee0997573524df6c
+
+    Directory: C:\wamp64\www\instavue\.git\objects\dc
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38           1945 db2d0460a065f639fe8290795c03fe852d12c6
+
+    Directory: C:\wamp64\www\instavue\.git\objects\de
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30           1088 3ec4b4556df01c48a5305fa0756ba793361e3c
+
+    Directory: C:\wamp64\www\instavue\.git\objects\df
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           2254 5671d9fe1c5df297097fef18a2dc9423d7652f
+
+    Directory: C:\wamp64\www\instavue\.git\objects\e0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38             54 edfd2d6a600eac84937ff4e6e84a212defeb3c
+-ar--          22/05/2025    12:30            292 fdfdf1f2db600384450f710841980f316f2fed
+
+    Directory: C:\wamp64\www\instavue\.git\objects\e3
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            195 068a14604c0139f392f81875deccc9c11cf4c1
+
+    Directory: C:\wamp64\www\instavue\.git\objects\e6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            234 fff28c444b83402b262122aa4c29a71fe70247
+
+    Directory: C:\wamp64\www\instavue\.git\objects\e8
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05           1909 8f8abf84c6a57b026f1a45813a29b18a432fa9
+
+    Directory: C:\wamp64\www\instavue\.git\objects\ea
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            178 b10001b14be150fa4c5b8992d5fd18dbd6d7d7
+
+    Directory: C:\wamp64\www\instavue\.git\objects\eb
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            118 026799caa7402a98365be705e4b1ed1b4fd965
+-ar--          22/05/2025    21:38            970 3cb8ab1ddf9b38c88818d12bacc886177499d4
+-ar--          22/05/2025    12:30            237 c2bc34164ea8e3060761fd0363d8462fa163fd
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:38            173 91d6f2f79e95449899a8f2ad10c6e7adccd0a3
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f1
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            871 08ed10a9e4aff4337f805d950dc7db3e31b275
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f2
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            880 46e2b1b18e53f2a6afde3d080783dd3e25cbd4
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f3
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    12:30            110 aeea93e5f0d0ef5e7d122da83ccfd79c734b79
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f4
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            486 7dd304f3ea74b448d54eadd45e24277579b7b1
+-ar--          22/05/2025    21:05            118 a28ee30b9898211a187f324fdbe2a576b4bf17
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f5
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:18            339 43cdc1c439e42bc15fa7912a240197db7b508e
+-ar--          22/05/2025    21:05           1051 ae2df1955fdb62dc752710596715749b43cc42
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f6
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            329 6c5ab6085c6a6d16d36ca11b3ce22621bbdbc3
+
+    Directory: C:\wamp64\www\instavue\.git\objects\f8
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            100 15e0804ea56e1ea60e01105d63a3d4fe25568e
+
+    Directory: C:\wamp64\www\instavue\.git\objects\fa
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05             92 bc60a023e1a57157644ed45ba6010b666f2cf1
+
+    Directory: C:\wamp64\www\instavue\.git\objects\fb
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          22/05/2025    21:05            871 4068d24f3aeaf74f0622a617d6f88b7fa6d335
+-ar--          22/05/2025    12:30            292 78db87c61f03c5499421fa53961ef05fb34b83
+
+    Directory: C:\wamp64\www\instavue\.git\objects\pack
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-ar--          21/05/2025    14:16          15492 pack-e68af63b136484bbc805bf2e61448088064aacaf.idx
+-ar--          21/05/2025    14:16         291212 pack-e68af63b136484bbc805bf2e61448088064aacaf.pack
+-ar--          21/05/2025    14:16           2112 pack-e68af63b136484bbc805bf2e61448088064aacaf.rev
+
+    Directory: C:\wamp64\www\instavue\.git\refs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:38                heads
+d----          21/05/2025    14:16                remotes
+d----          21/05/2025    14:16                tags
+
+    Directory: C:\wamp64\www\instavue\.git\refs\heads
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:38             41 main
+
+    Directory: C:\wamp64\www\instavue\.git\refs\remotes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    22:22                origin
+
+    Directory: C:\wamp64\www\instavue\.git\refs\remotes\origin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          21/05/2025    14:16             30 HEAD
+-a---          22/05/2025    21:18             41 main
+
+    Directory: C:\wamp64\www\instavue\.github
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          21/05/2025    14:16                workflows
+
+    Directory: C:\wamp64\www\instavue\.github\workflows
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          21/05/2025    14:16            885 lint.yml
+-a---          21/05/2025    14:16           1045 tests.yml
+
+    Directory: C:\wamp64\www\instavue\app
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Http
+d----          22/05/2025    21:05                Models
+d----          22/05/2025    13:32                Policies
+d----          22/05/2025    13:32                Providers
+
+    Directory: C:\wamp64\www\instavue\app\Http
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:25                Controllers
+d----          22/05/2025    13:32                Middleware
+d----          22/05/2025    13:32                Requests
+
+    Directory: C:\wamp64\www\instavue\app\Http\Controllers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Auth
+d----          22/05/2025    21:05                Settings
+-a---          22/05/2025    13:32           1412 CommentController.php
+-a---          22/05/2025    13:32             77 Controller.php
+-a---          22/05/2025    21:05           2546 ExploreController.php
+-a---          22/05/2025    13:32            755 FollowController.php
+-a---          22/05/2025    21:05           2793 HomeController.php
+-a---          22/05/2025    13:32           1164 LikeController.php
+-a---          22/05/2025    13:32           3319 PostController.php
+-a---          22/05/2025    21:25           3373 SavedPostController.php
+-a---          22/05/2025    21:05           1795 SearchController.php
+
+    Directory: C:\wamp64\www\instavue\app\Http\Controllers\Auth
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1419 AuthenticatedSessionController.php
+-a---          22/05/2025    13:32           1055 ConfirmablePasswordController.php
+-a---          22/05/2025    13:32            630 EmailVerificationNotificationController.php
+-a---          22/05/2025    13:32            647 EmailVerificationPromptController.php
+-a---          22/05/2025    13:32           2299 NewPasswordController.php
+-a---          22/05/2025    13:32           1022 PasswordResetLinkController.php
+-a---          22/05/2025    13:32           1495 RegisteredUserController.php
+-a---          22/05/2025    13:32            900 VerifyEmailController.php
+
+    Directory: C:\wamp64\www\instavue\app\Http\Controllers\Settings
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            947 PasswordController.php
+-a---          22/05/2025    21:15           5434 ProfileController.php
+
+    Directory: C:\wamp64\www\instavue\app\Http\Middleware
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            416 Authenticate.php
+-a---          22/05/2025    13:32            548 HandleAppearance.php
+-a---          22/05/2025    13:32           1477 HandleInertiaRequests.php
+
+    Directory: C:\wamp64\www\instavue\app\Http\Requests
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Auth
+d----          22/05/2025    21:05                Settings
+
+    Directory: C:\wamp64\www\instavue\app\Http\Requests\Auth
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           2233 LoginRequest.php
+
+    Directory: C:\wamp64\www\instavue\app\Http\Requests\Settings
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:05            885 ProfileUpdateRequest.php
+
+    Directory: C:\wamp64\www\instavue\app\Models
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            571 Comment.php
+-a---          22/05/2025    13:32            109 Follow.php
+-a---          22/05/2025    13:32            542 Like.php
+-a---          22/05/2025    21:23           1119 Post.php
+-a---          22/05/2025    21:22           2358 User.php
+
+    Directory: C:\wamp64\www\instavue\app\Policies
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            362 PostPolicy.php
+
+    Directory: C:\wamp64\www\instavue\app\Providers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            361 AppServiceProvider.php
+-a---          22/05/2025    13:32           1347 AuthServiceProvider.php
+
+    Directory: C:\wamp64\www\instavue\bootstrap
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    22:17                cache
+-a---          22/05/2025    13:32            914 app.php
+-a---          22/05/2025    13:32             64 providers.php
+
+    Directory: C:\wamp64\www\instavue\bootstrap\cache
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+-a---          22/05/2025    22:17           1355 packages.php
+-a---          22/05/2025    22:17          21784 services.php
+
+    Directory: C:\wamp64\www\instavue\config
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           4263 app.php
+-a---          22/05/2025    13:32           4029 auth.php
+-a---          22/05/2025    13:32           3476 cache.php
+-a---          22/05/2025    13:32           6258 database.php
+-a---          22/05/2025    13:32           2500 filesystems.php
+-a---          22/05/2025    13:32           4318 logging.php
+-a---          22/05/2025    13:32           3539 mail.php
+-a---          22/05/2025    13:32           3824 queue.php
+-a---          22/05/2025    13:32           3037 sanctum.php
+-a---          22/05/2025    13:32           1035 services.php
+-a---          22/05/2025    13:32           7858 session.php
+
+    Directory: C:\wamp64\www\instavue\database
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                factories
+d----          22/05/2025    21:20                migrations
+d----          22/05/2025    21:05                seeders
+-a---          22/05/2025    13:32             10 .gitignore
+
+    Directory: C:\wamp64\www\instavue\database\factories
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1075 UserFactory.php
+
+    Directory: C:\wamp64\www\instavue\database\migrations
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:05           1671 0001_01_01_000000_create_users_table.php
+-a---          22/05/2025    13:32            849 0001_01_01_000001_create_cache_table.php
+-a---          22/05/2025    13:32           1812 0001_01_01_000002_create_jobs_table.php
+-a---          22/05/2025    13:32            781 2025_05_19_172236_create_posts_table.php
+-a---          22/05/2025    13:32            898 2025_05_19_181853_create_follows_table.php
+-a---          22/05/2025    13:32            723 2025_05_19_190623_create_comments_table.php
+-a---          22/05/2025    13:32            833 2025_05_19_201407_create_likes_table.php
+-a---          22/05/2025    13:32            856 2025_05_20_173329_create_personal_access_tokens_table.php
+-a---          22/05/2025    21:21            964 2025_05_22_192047_create_saved_posts_table.php
+
+    Directory: C:\wamp64\www\instavue\database\seeders
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            509 DatabaseSeeder.php
+-a---          22/05/2025    21:05           1061 UserSeeder.php
+
+    Directory: C:\wamp64\www\instavue\public
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                images
+l----          22/05/2025    21:16                storage -> C:\wamp64\www\instavue\storage\app\public
+-a---          22/05/2025    13:32            740 .htaccess
+-a---          22/05/2025    13:32           8660 apple-touch-icon.png
+-a---          22/05/2025    13:32           9662 favicon.ico
+-a---          22/05/2025    13:32            543 index.php
+-a---          22/05/2025    13:32            949 instavue-logo.png
+-a---          22/05/2025    13:32             24 robots.txt
+
+    Directory: C:\wamp64\www\instavue\public\images
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            949 instavue-logo.png
+
+    Directory: C:\wamp64\www\instavue\resources
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                css
+d----          22/05/2025    21:05                js
+d----          22/05/2025    13:32                views
+
+    Directory: C:\wamp64\www\instavue\resources\css
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           5274 app.css
+
+    Directory: C:\wamp64\www\instavue\resources\js
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:05                components
+d----          22/05/2025    13:32                composables
+d----          22/05/2025    21:05                layouts
+d----          22/05/2025    13:32                lib
+d----          22/05/2025    21:27                Pages
+d----          22/05/2025    13:32                types
+-a---          22/05/2025    21:05            860 app.ts
+-a---          22/05/2025    13:32           1039 bootstrap.ts
+-a---          22/05/2025    13:32           1463 ssr.ts
+-a---          22/05/2025    21:05           3006 ziggy.js
+
+    Directory: C:\wamp64\www\instavue\resources\js\components
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                ui
+-a---          22/05/2025    13:32            562 AppContent.vue
+-a---          22/05/2025    13:32           1173 AppearanceTabs.vue
+-a---          22/05/2025    21:05           7272 AppHeader.vue
+-a---          22/05/2025    13:32            495 AppLogo.vue
+-a---          22/05/2025    13:32            993 AppLogoIcon.vue
+-a---          22/05/2025    13:32            536 AppShell.vue
+-a---          22/05/2025    13:32           1660 AppSidebar.vue
+-a---          22/05/2025    13:32            809 AppSidebarHeader.vue
+-a---          22/05/2025    13:32           1117 Breadcrumbs.vue
+-a---          22/05/2025    13:32            523 DangerButton.vue
+-a---          22/05/2025    13:32           3331 DeleteUser.vue
+-a---          22/05/2025    13:32            379 Heading.vue
+-a---          22/05/2025    13:32            352 HeadingSmall.vue
+-a---          22/05/2025    13:32            748 Icon.vue
+-a---          22/05/2025    13:32            237 InputError.vue
+-a---          22/05/2025    13:32            305 InputLabel.vue
+-a---          22/05/2025    13:32           2630 Modal.vue
+-a---          22/05/2025    13:32           1061 NavFooter.vue
+-a---          22/05/2025    13:32           1007 NavMain.vue
+-a---          22/05/2025    21:05           2587 NavUser.vue
+-a---          22/05/2025    13:32            623 PlaceholderPattern.vue
+-a---          22/05/2025    21:46           5112 PostCard.vue
+-a---          22/05/2025    13:32            647 PrimaryButton.vue
+-a---          22/05/2025    13:32            616 SecondaryButton.vue
+-a---          22/05/2025    13:32            801 TextInput.vue
+-a---          22/05/2025    13:32            579 TextLink.vue
+-a---          22/05/2025    21:05           1045 UserCard.vue
+-a---          22/05/2025    13:32           1105 UserInfo.vue
+-a---          22/05/2025    13:32           1329 UserMenuContent.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                avatar
+d----          22/05/2025    13:32                breadcrumb
+d----          22/05/2025    13:32                button
+d----          22/05/2025    13:32                card
+d----          22/05/2025    13:32                checkbox
+d----          22/05/2025    13:32                collapsible
+d----          22/05/2025    13:32                dialog
+d----          22/05/2025    13:32                dropdown-menu
+d----          22/05/2025    13:32                input
+d----          22/05/2025    13:32                label
+d----          22/05/2025    13:32                navigation-menu
+d----          22/05/2025    13:32                separator
+d----          22/05/2025    13:32                sheet
+d----          22/05/2025    13:32                sidebar
+d----          22/05/2025    13:32                skeleton
+d----          22/05/2025    13:32                sonner
+d----          22/05/2025    13:32                textarea
+d----          22/05/2025    13:32                tooltip
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\avatar
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            400 Avatar.vue
+-a---          22/05/2025    13:32            618 AvatarFallback.vue
+-a---          22/05/2025    13:32            325 AvatarImage.vue
+-a---          22/05/2025    13:32            173 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\breadcrumb
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            282 Breadcrumb.vue
+-a---          22/05/2025    13:32            529 BreadcrumbEllipsis.vue
+-a---          22/05/2025    13:32            330 BreadcrumbItem.vue
+-a---          22/05/2025    13:32            490 BreadcrumbLink.vue
+-a---          22/05/2025    13:32            386 BreadcrumbList.vue
+-a---          22/05/2025    13:32            394 BreadcrumbPage.vue
+-a---          22/05/2025    13:32            446 BreadcrumbSeparator.vue
+-a---          22/05/2025    13:32            465 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\button
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            635 Button.vue
+-a---          22/05/2025    13:32           1732 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\card
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            407 Card.vue
+-a---          22/05/2025    13:32            358 CardAction.vue
+-a---          22/05/2025    13:32            301 CardContent.vue
+-a---          22/05/2025    13:32            326 CardDescription.vue
+-a---          22/05/2025    13:32            335 CardFooter.vue
+-a---          22/05/2025    13:32            450 CardHeader.vue
+-a---          22/05/2025    13:32            319 CardTitle.vue
+-a---          22/05/2025    13:32            397 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\checkbox
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1436 Checkbox.vue
+-a---          22/05/2025    13:32             53 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\collapsible
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            495 Collapsible.vue
+-a---          22/05/2025    13:32            306 CollapsibleContent.vue
+-a---          22/05/2025    13:32            306 CollapsibleTrigger.vue
+-a---          22/05/2025    13:32            205 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\dialog
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            400 Dialog.vue
+-a---          22/05/2025    13:32            264 DialogClose.vue
+-a---          22/05/2025    13:32           1775 DialogContent.vue
+-a---          22/05/2025    13:32            674 DialogDescription.vue
+-a---          22/05/2025    13:32            350 DialogFooter.vue
+-a---          22/05/2025    13:32            342 DialogHeader.vue
+-a---          22/05/2025    13:32            698 DialogOverlay.vue
+-a---          22/05/2025    13:32           1821 DialogScrollContent.vue
+-a---          22/05/2025    13:32            643 DialogTitle.vue
+-a---          22/05/2025    13:32            276 DialogTrigger.vue
+-a---          22/05/2025    13:32            624 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\dropdown-menu
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            449 DropdownMenu.vue
+-a---          22/05/2025    13:32           1400 DropdownMenuCheckboxItem.vue
+-a---          22/05/2025    13:32           1453 DropdownMenuContent.vue
+-a---          22/05/2025    13:32            301 DropdownMenuGroup.vue
+-a---          22/05/2025    13:32           1451 DropdownMenuItem.vue
+-a---          22/05/2025    13:32            741 DropdownMenuLabel.vue
+-a---          22/05/2025    13:32            512 DropdownMenuRadioGroup.vue
+-a---          22/05/2025    13:32           1391 DropdownMenuRadioItem.vue
+-a---          22/05/2025    13:32            590 DropdownMenuSeparator.vue
+-a---          22/05/2025    13:32            362 DropdownMenuShortcut.vue
+-a---          22/05/2025    13:32            444 DropdownMenuSub.vue
+-a---          22/05/2025    13:32           1276 DropdownMenuSubContent.vue
+-a---          22/05/2025    13:32           1021 DropdownMenuSubTrigger.vue
+-a---          22/05/2025    13:32            386 DropdownMenuTrigger.vue
+-a---          22/05/2025    13:32           1098 index.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\input
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             47 index.ts
+-a---          22/05/2025    13:32           1274 Input.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\label
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             47 index.ts
+-a---          22/05/2025    13:32            747 Label.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\navigation-menu
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1218 index.ts
+-a---          22/05/2025    13:32           1020 NavigationMenu.vue
+-a---          22/05/2025    13:32           2205 NavigationMenuContent.vue
+-a---          22/05/2025    13:32            948 NavigationMenuIndicator.vue
+-a---          22/05/2025    13:32            567 NavigationMenuItem.vue
+-a---          22/05/2025    13:32           1240 NavigationMenuLink.vue
+-a---          22/05/2025    13:32            750 NavigationMenuList.vue
+-a---          22/05/2025    13:32            958 NavigationMenuTrigger.vue
+-a---          22/05/2025    13:32           1119 NavigationMenuViewport.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\separator
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             55 index.ts
+-a---          22/05/2025    13:32            748 Separator.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\sheet
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            470 index.ts
+-a---          22/05/2025    13:32            399 Sheet.vue
+-a---          22/05/2025    13:32            263 SheetClose.vue
+-a---          22/05/2025    13:32           2304 SheetContent.vue
+-a---          22/05/2025    13:32            600 SheetDescription.vue
+-a---          22/05/2025    13:32            331 SheetFooter.vue
+-a---          22/05/2025    13:32            320 SheetHeader.vue
+-a---          22/05/2025    13:32            697 SheetOverlay.vue
+-a---          22/05/2025    13:32            564 SheetTitle.vue
+-a---          22/05/2025    13:32            275 SheetTrigger.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\sidebar
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           3433 index.ts
+-a---          22/05/2025    13:32           3447 Sidebar.vue
+-a---          22/05/2025    13:32            421 SidebarContent.vue
+-a---          22/05/2025    13:32            348 SidebarFooter.vue
+-a---          22/05/2025    13:32            364 SidebarGroup.vue
+-a---          22/05/2025    13:32            887 SidebarGroupAction.vue
+-a---          22/05/2025    13:32            353 SidebarGroupContent.vue
+-a---          22/05/2025    13:32            813 SidebarGroupLabel.vue
+-a---          22/05/2025    13:32            348 SidebarHeader.vue
+-a---          22/05/2025    13:32            428 SidebarInput.vue
+-a---          22/05/2025    13:32            586 SidebarInset.vue
+-a---          22/05/2025    13:32            353 SidebarMenu.vue
+-a---          22/05/2025    13:32           1340 SidebarMenuAction.vue
+-a---          22/05/2025    13:32            844 SidebarMenuBadge.vue
+-a---          22/05/2025    13:32           1284 SidebarMenuButton.vue
+-a---          22/05/2025    13:32            907 SidebarMenuButtonChild.vue
+-a---          22/05/2025    13:32            353 SidebarMenuItem.vue
+-a---          22/05/2025    13:32            811 SidebarMenuSkeleton.vue
+-a---          22/05/2025    13:32            488 SidebarMenuSub.vue
+-a---          22/05/2025    13:32           1349 SidebarMenuSubButton.vue
+-a---          22/05/2025    13:32            365 SidebarMenuSubItem.vue
+-a---          22/05/2025    13:32           2284 SidebarProvider.vue
+-a---          22/05/2025    13:32           1272 SidebarRail.vue
+-a---          22/05/2025    13:32            426 SidebarSeparator.vue
+-a---          22/05/2025    13:32            625 SidebarTrigger.vue
+-a---          22/05/2025    13:32            666 utils.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\skeleton
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             53 index.ts
+-a---          22/05/2025    13:32            349 Skeleton.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\sonner
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             50 index.ts
+-a---          22/05/2025    13:32            383 Sonner.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\textarea
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            895 Textarea.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\components\ui\tooltip
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            248 index.ts
+-a---          22/05/2025    13:32            408 Tooltip.vue
+-a---          22/05/2025    13:32           1363 TooltipContent.vue
+-a---          22/05/2025    13:32            287 TooltipProvider.vue
+-a---          22/05/2025    13:32            282 TooltipTrigger.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\composables
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           2374 useAppearance.ts
+-a---          22/05/2025    13:32            395 useInitials.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\layouts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                app
+d----          22/05/2025    13:32                auth
+d----          22/05/2025    13:32                settings
+-a---          22/05/2025    21:05           2845 AppLayout.vue
+-a---          22/05/2025    13:32            282 AuthLayout.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\layouts\app
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            557 AppHeaderLayout.vue
+-a---          22/05/2025    13:32            678 AppSidebarLayout.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\layouts\auth
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1339 AuthCardLayout.vue
+-a---          22/05/2025    13:32           1227 AuthSimpleLayout.vue
+-a---          22/05/2025    13:32           1633 AuthSplitLayout.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\layouts\settings
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1804 Layout.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\lib
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            171 utils.ts
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:05                Auth
+d----          22/05/2025    13:32                Posts
+d----          22/05/2025    21:05                Profile
+d----          22/05/2025    21:28                SavedPosts
+d----          22/05/2025    21:05                Search
+d----          22/05/2025    13:32                settings
+-a---          22/05/2025    21:05           1792 Explore.vue
+-a---          22/05/2025    21:05           2581 Feed.vue
+-a---          22/05/2025    21:33           2387 Home.vue
+-a---          22/05/2025    13:46           2459 Welcome.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\Auth
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1766 ConfirmPassword.vue
+-a---          22/05/2025    13:32           4723 ForgotPassword.vue
+-a---          22/05/2025    13:32           3395 Login.vue
+-a---          22/05/2025    21:05           9117 LoginRegisterSlider.vue
+-a---          22/05/2025    13:32           3303 Register.vue
+-a---          22/05/2025    13:32           2866 ResetPassword.vue
+-a---          22/05/2025    13:32           1307 VerifyEmail.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\Posts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           4558 Create.vue
+-a---          22/05/2025    13:32           3787 Edit.vue
+-a---          22/05/2025    13:32           8820 Show.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\Profile
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Partials
+-a---          22/05/2025    13:32           1533 Edit.vue
+-a---          22/05/2025    22:15           5819 Show.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\Profile\Partials
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           3099 DeleteUserForm.vue
+-a---          22/05/2025    13:32           3167 UpdatePasswordForm.vue
+-a---          22/05/2025    13:32           3174 UpdateProfileInformationForm.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\SavedPosts
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:36           2648 Index.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\Search
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:05           6207 Results.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\Pages\settings
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            882 Appearance.vue
+-a---          22/05/2025    13:32           4625 Password.vue
+-a---          22/05/2025    13:32           4175 Profile.vue
+
+    Directory: C:\wamp64\www\instavue\resources\js\types
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            103 globals.d.ts
+-a---          22/05/2025    13:32            810 index.d.ts
+-a---          22/05/2025    13:32            324 ziggy.d.ts
+
+    Directory: C:\wamp64\www\instavue\resources\views
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1623 app.blade.php
+
+    Directory: C:\wamp64\www\instavue\routes
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:05           2763 auth.php
+-a---          22/05/2025    13:32            210 console.php
+-a---          22/05/2025    13:32            912 settings.php
+-a---          22/05/2025    21:29           3449 web.php
+
+    Directory: C:\wamp64\www\instavue\storage
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                app
+d----          22/05/2025    13:32                framework
+d----          22/05/2025    13:36                logs
+
+    Directory: C:\wamp64\www\instavue\storage\app
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                private
+d----          22/05/2025    21:13                public
+-a---          22/05/2025    13:32             33 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\app\private
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\app\public
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    21:37                uploads
+-a---          22/05/2025    13:32             14 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\app\public\uploads
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    21:13        1434428 8QtrUHyzgaoUmt3MlxfHvhbWM8v6nkEeUR7VQeeZ.jpg
+-a---          22/05/2025    21:17          42001 bND6AzOxrgCPDwpyRuMsXB22sY6ie1Px78iIyBdH.jpg
+-a---          22/05/2025    21:37         255017 KH5XEocBqGerc0gtZxKLrdLsgucoLtqYE7q0lrv5.jpg
+-a---          22/05/2025    21:16        1448579 XitySnDVOBwGP7Jyblf4SjUuiyBFOCbhQ8bMVsuD.jpg
+
+    Directory: C:\wamp64\www\instavue\storage\framework
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                cache
+d----          22/05/2025    13:32                sessions
+d----          22/05/2025    13:32                testing
+d----          22/05/2025    22:17                views
+-a---          22/05/2025    13:32            119 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\framework\cache
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                data
+-a---          22/05/2025    13:32             21 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\framework\cache\data
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\framework\sessions
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\framework\testing
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+
+    Directory: C:\wamp64\www\instavue\storage\framework\views
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+-a---          22/05/2025    22:17            610 005b4fb4ff2502d6296e60bcb85aa59e.php
+-a---          22/05/2025    22:17            493 0f6154c51cfd61f16170429537da6441.php
+-a---          22/05/2025    22:17           8291 0f98361ba8aef9e927ea928f1d33c480.php
+-a---          22/05/2025    22:17           2235 178f829b9e45423087d7f9d780910d8c.php
+-a---          22/05/2025    22:17          11639 1dea0ac2431596fd90f4854880ba2023.php
+-a---          22/05/2025    22:17           2809 3544816fa5d668d4ab6ab67e37a57c6e.php
+-a---          22/05/2025    22:17           7163 3d02ad98f57ff20d4264fea07f2a095f.php
+-a---          22/05/2025    22:17            487 60550f6ae471b7d18d028e49519ede1c.php
+-a---          22/05/2025    22:17           5106 636f138bbb6606735e015d611ade48fa.php
+-a---          22/05/2025    22:17          11119 66cdd8f06679559873e30775a3e16450.php
+-a---          22/05/2025    22:17           2072 729cf1b9595a1b787f879dbe20683b0c.php
+-a---          22/05/2025    22:17          10588 85ed5c6d746fa98f422c60b18fd525b3.php
+-a---          22/05/2025    22:17            509 98f0ec11dede1d1b61f1638cee5f7134.php
+-a---          22/05/2025    22:17            685 d09230089e4f54ff8be40148719f1567.php
+-a---          22/05/2025    22:17           3074 f83900a56259937761a648c843a75336.php
+-a---          22/05/2025    22:17            594 f9fe8a5f0e700018bc443ce6a6e8e424.php
+
+    Directory: C:\wamp64\www\instavue\storage\logs
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             14 .gitignore
+-a---          22/05/2025    22:17         175571 laravel.log
+
+    Directory: C:\wamp64\www\instavue\tests
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Feature
+d----          22/05/2025    13:32                Unit
+-a---          22/05/2025    13:32           1584 Pest.php
+-a---          22/05/2025    13:32            142 TestCase.php
+
+    Directory: C:\wamp64\www\instavue\tests\Feature
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          22/05/2025    13:32                Auth
+d----          22/05/2025    13:32                Settings
+-a---          22/05/2025    13:32            392 DashboardTest.php
+-a---          22/05/2025    13:32            130 ExampleTest.php
+
+    Directory: C:\wamp64\www\instavue\tests\Feature\Auth
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32            943 AuthenticationTest.php
+-a---          22/05/2025    13:32           1324 EmailVerificationTest.php
+-a---          22/05/2025    13:32            788 PasswordConfirmationTest.php
+-a---          22/05/2025    13:32           1626 PasswordResetTest.php
+-a---          22/05/2025    13:32            499 RegistrationTest.php
+
+    Directory: C:\wamp64\www\instavue\tests\Feature\Settings
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32           1135 PasswordUpdateTest.php
+-a---          22/05/2025    13:32           2096 ProfileUpdateTest.php
+
+    Directory: C:\wamp64\www\instavue\tests\Unit
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          22/05/2025    13:32             80 ExampleTest.php
+
