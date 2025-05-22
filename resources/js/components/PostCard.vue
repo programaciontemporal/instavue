@@ -1,40 +1,125 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
+import { computed } from 'vue'; // Importar computed
+import { Button } from '@/components/ui/button'; // Asegúrate de tener este componente si lo usas
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Asegúrate de tener estos componentes si los usas
+import { getInitials } from '@/composables/useInitials'; // Asegúrate de tener este composable si lo usas
+import { HeartIcon, MessageCircleIcon, BookmarkIcon } from 'lucide-vue-next'; // Importar iconos necesarios
 
-defineProps({
-    post: {
-        type: Object,
-        required: true,
+const props = defineProps({
+    post: Object, // El objeto post incluye is_liked_by_auth_user y is_saved_by_auth_user
+    authUserId: {
+        type: Number,
+        default: null, // Puede ser nulo si no hay usuario autenticado
     },
+});
+
+// Lógica para Likes
+const likeForm = useForm({});
+
+const toggleLike = () => {
+    if (!props.authUserId) {
+        alert('Debes iniciar sesión para dar "Me gusta".');
+        return;
+    }
+
+    if (props.post.is_liked_by_auth_user) {
+        likeForm.delete(route('likes.destroy', props.post.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                props.post.is_liked_by_auth_user = false;
+                props.post.likes_count--;
+            }
+        });
+    } else {
+        likeForm.post(route('likes.store', props.post.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                props.post.is_liked_by_auth_user = true;
+                props.post.likes_count++;
+            }
+        });
+    }
+};
+
+// Lógica para Guardar/Desguardar
+const saveForm = useForm({});
+
+const toggleSave = () => {
+    if (!props.authUserId) {
+        alert('Debes iniciar sesión para guardar publicaciones.');
+        return;
+    }
+
+    if (props.post.is_saved_by_auth_user) {
+        saveForm.delete(route('posts.unsave', props.post.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                props.post.is_saved_by_auth_user = false;
+            }
+        });
+    } else {
+        saveForm.post(route('posts.save', props.post.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                props.post.is_saved_by_auth_user = true;
+            }
+        });
+    }
+};
+
+// Lógica para el avatar del usuario
+const userAvatarUrl = computed(() => {
+    return props.post.user.avatar || '/images/default-avatar.png'; // Ruta por defecto para el avatar
 });
 </script>
 
 <template>
-    <div class="relative group aspect-square overflow-hidden rounded-lg shadow-md">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+        <div class="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
+            <Link :href="route('profile.show', post.user.id)" class="flex items-center">
+                <Avatar class="size-10 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700">
+                    <AvatarImage :src="userAvatarUrl" :alt="post.user.name" class="object-cover w-full h-full" />
+                    <AvatarFallback class="rounded-full bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white text-base">
+                        {{ getInitials(post.user.name) }}
+                    </AvatarFallback>
+                </Avatar>
+                <span class="ml-3 font-semibold text-gray-900 dark:text-gray-100">{{ post.user.name }}</span>
+            </Link>
+        </div>
+
         <Link :href="route('posts.show', post.id)">
-            <img :src="post.image_path" :alt="post.caption"
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" />
-            <div
-                class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="flex space-x-4 text-white font-bold">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.815 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                        <span>{{ post.likes_count }}</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.756 3 12.25c0 1.993.826 3.89 2.245 5.31l-.224.224H3.75a.75.75 0 0 0-.53 1.28L6.75 21l3.5-3.5a.75.75 0 0 0-.53-1.28H7.756c-1.42-.82-2.245-2.317-2.245-4.01V12.25c0-3.036 2.69-5.5 6-5.5s6 2.464 6 5.5-2.69 5.5-6 5.5Z" />
-                        </svg>
-                        <span>{{ post.comments_count }}</span>
-                    </div>
+            <img :src="post.image_path" :alt="post.caption" class="w-full object-cover max-h-96" loading="lazy">
+        </Link>
+
+        <div class="p-4">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-4">
+                    <Button variant="ghost" size="icon" @click="toggleLike"
+                        :class="{ 'text-red-500': post.is_liked_by_auth_user, 'text-gray-500 dark:text-gray-400': !post.is_liked_by_auth_user }">
+                        <HeartIcon :fill="post.is_liked_by_auth_user ? 'currentColor' : 'none'" />
+                    </Button>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ post.likes_count }}</span>
+
+                    <Link :href="route('posts.show', post.id)">
+                        <Button variant="ghost" size="icon" class="text-gray-500 dark:text-gray-400">
+                            <MessageCircleIcon />
+                        </Button>
+                    </Link>
+                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ post.comments_count }}</span>
+                </div>
+
+                <div v-if="authUserId">
+                    <Button variant="ghost" size="icon" @click="toggleSave"
+                        :class="{ 'text-blue-500': post.is_saved_by_auth_user, 'text-gray-500 dark:text-gray-400': !post.is_saved_by_auth_user }">
+                        <BookmarkIcon :fill="post.is_saved_by_auth_user ? 'currentColor' : 'none'" />
+                    </Button>
                 </div>
             </div>
-        </Link>
+
+            <p class="text-sm text-gray-800 dark:text-gray-200 mb-2 whitespace-pre-wrap">{{ post.caption }}</p>
+
+            <p class="text-xs text-gray-500 dark:text-gray-400">Publicado {{ post.created_at }}</p>
+        </div>
     </div>
 </template>

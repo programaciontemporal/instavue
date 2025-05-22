@@ -40,12 +40,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas para publicaciones
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
     // Rutas para mostrar, editar, actualizar y eliminar posts (AÑADIDAS)
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::patch('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-
 
     // Rutas para el feed principal
     Route::get('/feed', [HomeController::class, 'index'])->name('feed');
@@ -62,9 +62,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('likes.destroy');
 
     // Rutas para Guardar/Desguardar Publicaciones
-    // Route::get('/posts/saved', [SavedPostController::class, 'index'])->name('posts.saved');
-    // Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save');
-    // Route::delete('/posts/{post}/unsave', [SavedPostController::class, 'destroy'])->name('posts.unsave');
+    Route::get('/posts/saved', [SavedPostController::class, 'index'])->name('posts.saved');
+    Route::post('/posts/{post}/save', [SavedPostController::class, 'store'])->name('posts.save');
+    Route::delete('/posts/{post}/unsave', [SavedPostController::class, 'destroy'])->name('posts.unsave');
 
     // Ruta para la página de explorar
     Route::get('/explore', [ExploreController::class, 'index'])->name('explore');

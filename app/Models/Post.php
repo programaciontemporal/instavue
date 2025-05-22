@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage; // ¡Importa Storage!
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
@@ -41,11 +41,18 @@ class Post extends Model
     }
 
     /**
+     * Usuarios que han guardado esta publicación.
+     */
+    public function savers()
+    {
+        return $this->belongsToMany(User::class, 'saved_posts', 'post_id', 'user_id')->withTimestamps();
+    }
+
+    /**
      * Accesor para la URL completa de la imagen.
      */
     public function getImagePathAttribute($value)
     {
-        // Si el valor no es nulo, genera la URL pública
         return $value ? Storage::url($value) : null;
     }
 }

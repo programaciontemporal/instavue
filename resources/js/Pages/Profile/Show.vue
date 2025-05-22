@@ -1,120 +1,81 @@
 <script setup>
 import AppLayout from '@/layouts/AppLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import { computed } from 'vue';
-import { Button } from '@/components/ui/button';
+import PostCard from '@/components/PostCard.vue';
+import { Head, Link } from '@inertiajs/vue3';
+import { computed } from 'vue'; // Necesario para computed properties
+
+// Importa los componentes de avatar si los usas en esta vista para el perfil principal
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/composables/useInitials';
-import { PencilIcon, PlusSquareIcon } from 'lucide-vue-next';
-import PostCard from '@/components/PostCard.vue';
 
-const props = defineProps({
-    user: Object, // Datos del usuario del perfil que estamos viendo (incluye bio, contadores, is_following_auth_user)
-    posts: Object, // Publicaciones paginadas de ese usuario
+defineProps({
+    user: Object, // El objeto del usuario del perfil que se está viendo
+    posts: Object, // Colección paginada de publicaciones del usuario
     authUserId: Number, // ID del usuario autenticado
 });
 
-// Lógica para seguir/dejar de seguir
-const followForm = useForm({});
-
-const toggleFollow = () => {
-    // Si el usuario ya está siguiendo, se ejecuta la acción de "dejar de seguir"
-    if (props.user.is_following_auth_user) {
-        followForm.delete(route('unfollow', props.user.id), {
-            preserveScroll: true, // Mantener la posición de scroll tras la petición
-            onSuccess: () => {
-                // Actualizar el estado local directamente en la prop 'user'
-                props.user.is_following_auth_user = false;
-                props.user.followers_count--; // Decrementar el contador de seguidores
-            }
-        });
-    } else {
-        // Si el usuario no está siguiendo, se ejecuta la acción de "seguir"
-        followForm.post(route('follow', props.user.id), {
-            preserveScroll: true, // Mantener la posición de scroll tras la petición
-            onSuccess: () => {
-                // Actualizar el estado local directamente en la prop 'user'
-                props.user.is_following_auth_user = true;
-                props.user.followers_count++; // Incrementar el contador de seguidores
-            }
-        });
-    }
-};
-
-// Computada para determinar si el perfil que se está viendo es el del usuario autenticado
-const isOwnProfile = computed(() => props.authUserId === props.user.id);
+// Calcula la URL del avatar del usuario del perfil
+const profileAvatarUrl = computed(() => {
+    return props.user.avatar || '/images/default-avatar.png';
+});
 </script>
 
 <template>
-    <Head :title="`Perfil de ${user.name}`" />
+    <Head :title="user.name" />
 
     <AppLayout>
-        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <div class="flex items-center space-x-8 mb-8">
-                    <Avatar
-                        class="size-28 sm:size-32 md:size-40 overflow-hidden rounded-full border-2 border-gray-300 dark:border-gray-600">
-                        <AvatarImage v-if="user.avatar" :src="user.avatar" :alt="user.name"
-                            class="object-cover w-full h-full" />
-                        <AvatarFallback
-                            class="rounded-full bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white text-4xl">
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                Perfil de {{ user.name }}
+            </h2>
+        </template>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 mb-8 flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <Avatar class="size-24 md:size-32 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700 flex-shrink-0">
+                        <AvatarImage :src="profileAvatarUrl" :alt="user.name" class="object-cover w-full h-full" />
+                        <AvatarFallback class="rounded-full bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white text-3xl md:text-5xl">
                             {{ getInitials(user.name) }}
                         </AvatarFallback>
                     </Avatar>
 
-                    <div class="flex-1">
-                        <div class="flex items-center justify-between mb-4">
-                            <h2 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ user.name }}</h2>
-                            <div class="flex space-x-2">
-                                <Link v-if="isOwnProfile" :href="route('profile.edit')">
-                                    <Button variant="outline" class="flex items-center space-x-2">
-                                        <PencilIcon class="h-4 w-4" />
-                                        <span>Editar Perfil</span>
-                                    </Button>
-                                </Link>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">{{ user.name }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">{{ user.bio || 'Sin biografía.' }}</p>
 
-                                <Button v-else-if="authUserId" @click="toggleFollow"
-                                        :variant="user.is_following_auth_user ? 'outline' : 'default'">
-                                    {{ user.is_following_auth_user ? 'Dejar de seguir' : 'Seguir' }}
-                                </Button>
-                                <span v-else class="text-gray-500 text-sm">Inicia sesión para interactuar.</span>
-                            </div>
+                        <div class="flex justify-center md:justify-start space-x-6 text-gray-700 dark:text-gray-300 mb-4">
+                            <div><span class="font-bold">{{ user.posts_count }}</span> publicaciones</div>
+                            <div><span class="font-bold">{{ user.followers_count }}</span> seguidores</div>
+                            <div><span class="font-bold">{{ user.following_count }}</span> seguidos</div>
                         </div>
 
-                        <div class="flex space-x-6 text-gray-700 dark:text-gray-300 mb-4">
-                            <div>
-                                <span class="font-bold">{{ user.posts_count }}</span> publicaciones
-                            </div>
-                            <div>
-                                <span class="font-bold">{{ user.followers_count }}</span> seguidores
-                            </div>
-                            <div>
-                                <span class="font-bold">{{ user.following_count }}</span> seguidos
-                            </div>
+                        <div v-if="authUserId && authUserId !== user.id">
+                            <button
+                                @click="user.is_following_auth_user ? $inertia.delete(route('users.unfollow', user.id)) : $inertia.post(route('users.follow', user.id))"
+                                class="px-4 py-2 rounded-md font-semibold text-sm transition-colors duration-200"
+                                :class="user.is_following_auth_user ? 'bg-red-500 hover:bg-red-600 text-white' : 'bg-blue-500 hover:bg-blue-600 text-white'"
+                            >
+                                {{ user.is_following_auth_user ? 'Dejar de seguir' : 'Seguir' }}
+                            </button>
                         </div>
-
-                        <p class="text-gray-700 dark:text-gray-300">{{ user.email }}</p>
-                        <p v-if="user.bio" class="mt-2 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{{ user.bio }}</p>
-                        <p v-else class="mt-2 text-gray-500 dark:text-gray-400">Sin biografía.</p>
+                        <div v-else-if="authUserId === user.id">
+                            <Link :href="route('profile.edit')" class="inline-block bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-md font-semibold text-sm transition-colors duration-200">
+                                Editar Perfil
+                            </Link>
+                        </div>
                     </div>
                 </div>
 
-                <hr class="my-6 border-gray-200 dark:border-gray-700">
-
-                <h3 v-if="posts.data && posts.data.length > 0" class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-                    Publicaciones
-                </h3>
-                <div v-if="posts.data && posts.data.length > 0"
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <PostCard v-for="post in posts.data" :key="post.id" :post="post" />
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">Publicaciones</h3>
+                <div v-if="posts.data && posts.data.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <PostCard v-for="post in posts.data" :key="post.id" :post="post" :auth-user-id="authUserId" />
                 </div>
-                <div v-else class="text-center text-gray-500 dark:text-gray-400 p-6">
-                    <p>{{ isOwnProfile ? 'Aún no tienes publicaciones.' : `Este usuario aún no tiene publicaciones.` }}</p>
-                    <Link v-if="isOwnProfile" :href="route('posts.create')"
-                        class="text-blue-500 hover:underline flex items-center justify-center mt-2">
-                        <PlusSquareIcon class="h-4 w-4 mr-1" />
-                        <span>¡Sé el primero en publicar!</span>
-                    </Link>
+                <div v-else class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-center text-gray-500 dark:text-gray-400">
+                    <p>{{ user.id === authUserId ? 'Aún no has hecho ninguna publicación.' : 'Este usuario aún no tiene publicaciones.' }}</p>
+                    <p v-if="user.id === authUserId" class="mt-2">
+                        <Link :href="route('posts.create')" class="text-blue-500 hover:underline">Crea tu primera publicación</Link>.
+                    </p>
                 </div>
 
                 <div v-if="posts.links && posts.links.length > 3" class="flex justify-center mt-8">
@@ -124,10 +85,7 @@ const isOwnProfile = computed(() => props.authUserId === props.user.id);
                             :href="link.url"
                             v-html="link.label"
                             class="px-3 py-1 mx-1 border rounded"
-                            :class="{
-                                'bg-blue-500 text-white': link.active,
-                                'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active,
-                            }"
+                            :class="{ 'bg-blue-500 text-white': link.active, 'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active }"
                         />
                         <span
                             v-else
