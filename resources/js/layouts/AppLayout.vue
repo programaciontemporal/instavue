@@ -1,21 +1,37 @@
 <script setup>
 import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 import AppHeader from '@/components/AppHeader.vue';
-import NavUser from '@/components/NavUser.vue'; // Asegúrate de importar NavUser aquí
+import NavUser from '@/components/NavUser.vue';
 import Sonner from '@/components/ui/sonner/Sonner.vue';
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
 
-// ¡Añade esta línea para depurar el objeto de usuario!
-console.log('Objeto auth.user completo en AppLayout:', auth.value.user);
+// Almacena la consulta de búsqueda globalmente en AppLayout
+const globalSearchQuery = ref('');
+
+// Maneja el evento cuando se dispara una búsqueda desde AppHeader
+const handleSearchTriggered = (query) => {
+    // Aquí puedes añadir la lógica para iniciar una búsqueda de contenido
+    // en la página actual. `query` contiene el término de búsqueda.
+};
+
+// Maneja el evento cuando el texto de búsqueda cambia en AppHeader
+const handleSearchQueryChanged = (query) => {
+    globalSearchQuery.value = query;
+    // Puedes usar `globalSearchQuery.value` para filtrar resultados
+    // en tiempo real si lo deseas.
+};
 </script>
 
 <template>
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <AppHeader>
+        <AppHeader
+            @search-triggered="handleSearchTriggered"
+            @search-query-changed="handleSearchQueryChanged"
+        >
             <template #logo>
                 <Link :href="route('feed')">
                     <img src="/images/instavue-logo.png" alt="InstaVue Logo" class="h-8 w-auto">
@@ -52,7 +68,7 @@ console.log('Objeto auth.user completo en AppLayout:', auth.value.user);
         </header>
 
         <main>
-            <slot />
+            <slot :searchQuery="globalSearchQuery" />
         </main>
     </div>
     <Sonner richColors />

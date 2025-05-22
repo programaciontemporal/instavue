@@ -3,26 +3,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, DropdownMenuIte
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { type SharedData, type User } from '@/types';
 import { usePage, Link, router } from '@inertiajs/vue3';
-import { computed, watch } from 'vue';
-import { Home, Compass, PlusSquare, User as UserIcon, Settings, LogOut, Bookmark } from 'lucide-vue-next';
+import { computed } from 'vue';
+import { User as UserIcon, Settings, LogOut, Bookmark } from 'lucide-vue-next';
 import { getInitials } from '@/composables/useInitials';
 
 const page = usePage<SharedData>();
-// Aquí el tipo User debería ser el de tu modelo, que tiene 'name' y 'avatar'
 const user = computed(() => page.props.auth.user as User);
-
-watch(user, (newUser) => {
-    console.log('--- Depuración NavUser ---');
-    console.log('Objeto de usuario completo:', newUser);
-    console.log('Valor de user.avatar (para imagen de perfil):', newUser?.avatar); // Corregido: usando user.avatar
-    console.log('Valor de user.name (para iniciales y nombre):', newUser?.name); // Corregido: usando user.name
-    if (newUser?.name) { // Corregido: usando user.name
-        console.log('Iniciales calculadas:', getInitials(newUser.name)); // Corregido: usando user.name
-    } else {
-        console.log('user.name es nulo o vacío, no se pueden calcular las iniciales.');
-    }
-    console.log('--------------------------');
-}, { immediate: true });
 
 const logout = () => {
     router.post(route('logout'));
@@ -55,11 +41,6 @@ const logout = () => {
             <DropdownMenuItem as-child>
                 <Link :href="route('profile.edit')" class="flex items-center w-full">
                     <Settings class="mr-2 h-4 w-4" /> Ajustes
-                </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem as-child>
-                <Link :href="route('posts.saved')" class="flex items-center w-full">
-                    <Bookmark class="mr-2 h-4 w-4" /> Guardado
                 </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
