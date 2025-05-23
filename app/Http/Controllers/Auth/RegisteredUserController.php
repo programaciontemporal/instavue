@@ -13,22 +13,30 @@ use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
+/**
+ * Controlador para gestionar el registro de nuevos usuarios
+ *
+ * Este controlador se encarga de manejar el proceso de registro de nuevos usuarios
+ * en la aplicación, incluyendo la validación de datos y la creación de la cuenta.
+ */
 class RegisteredUserController extends Controller
 {
-    /**
-     * Show the registration page.
-     * Este método ha sido comentado/eliminado.
-     * La ruta 'auth.combined' ahora renderiza directamente el componente LoginRegisterSlider.vue.
-     */
-    // public function create(): Response
-    // {
-    //     return Inertia::render('auth/Register');
-    // }
+    // El método create ha sido eliminado ya que la ruta 'auth.combined'
+    // ahora maneja directamente el renderizado a través de LoginRegisterSlider.vue
 
     /**
-     * Handle an incoming registration request.
+     * Procesa una solicitud de registro de nuevo usuario
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * Este método realiza las siguientes acciones:
+     * - Valida los datos de entrada del usuario
+     * - Crea un nuevo registro de usuario en la base de datos
+     * - Dispara el evento Registered
+     * - Inicia sesión automáticamente con el nuevo usuario
+     * - Redirecciona al perfil del usuario
+     *
+     * @param Request $request La solicitud HTTP con los datos del nuevo usuario
+     * @return RedirectResponse Redirección al perfil del usuario
+     * @throws \Illuminate\Validation\ValidationException Si la validación falla
      */
     public function store(Request $request): RedirectResponse
     {

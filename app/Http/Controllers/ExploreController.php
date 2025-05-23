@@ -11,19 +11,17 @@ use Illuminate\Support\Facades\Auth;
 class ExploreController extends Controller
 {
     /**
-     * Display the explore page with all posts.
+     * Muestra la página de exploración con todas las publicaciones.
+     * Incluye información detallada de cada publicación, incluyendo likes,
+     * comentarios y estado de interacción del usuario actual.
      */
     public function index(): Response
     {
-        // Cargar todas las publicaciones con paginación y relaciones necesarias
-        $posts = Post::with(['user', 'likes', 'comments.user']) // Cargar relaciones necesarias
+        $posts = Post::with(['user', 'likes', 'comments.user'])
                      ->latest()
-                     ->paginate(12); // Paginación: 12 posts por página (ajústalo si lo deseas)
+                     ->paginate(12);
 
-        // Mapear la colección paginada para preparar los datos para el frontend
-        // El método `through()` de las colecciones paginadas es perfecto para esto
         $posts->through(function ($post) {
-            // Añadir si el usuario autenticado ha dado like
             $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
             return [
                 'id' => $post->id,
@@ -33,9 +31,8 @@ class ExploreController extends Controller
                 'user' => [
                     'id' => $post->user->id,
                     'name' => $post->user->name,
-                    'avatar' => $post->user->avatar, // Asegúrate de que el modelo User tenga un campo 'avatar'
+                    'avatar' => $post->user->avatar,
                 ],
-                // Solo el ID del usuario para el frontend
                 'likes' => $post->likes->map(fn($like) => ['user_id' => $like->user_id]),
                 'likes_count' => $post->likes->count(),
                 'comments' => $post->comments->map(function ($comment) {
@@ -56,7 +53,7 @@ class ExploreController extends Controller
 
         return Inertia::render('Explore', [
             'posts' => $posts,
-            'authUserId' => Auth::id(), // También pasamos el ID del usuario autenticado
+            'authUserId' => Auth::id(),
         ]);
     }
 }

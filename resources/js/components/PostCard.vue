@@ -1,21 +1,43 @@
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3';
-import { Button } from '@/components/ui/button'; // Corregido
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Corregido
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/composables/useInitials';
 import { HeartIcon, MessageCircleIcon, BookmarkIcon } from 'lucide-vue-next';
 
+/**
+ * @typedef {Object} Post
+ * @property {number} id - ID único del post
+ * @property {string} image_path - Ruta de la imagen del post
+ * @property {string} caption - Descripción del post
+ * @property {number} likes_count - Número de likes
+ * @property {number} comments_count - Número de comentarios
+ * @property {boolean} is_liked_by_auth_user - Si el usuario actual dio like
+ * @property {boolean} is_saved_by_auth_user - Si el usuario actual guardó el post
+ * @property {Object} user - Información del usuario que creó el post
+ */
+
+/**
+ * @type {import('vue').PropType<{post: Post, authUserId: number|null}>}
+ */
 const props = defineProps({
-    post: Object,
+    post: {
+        type: Object,
+        required: true
+    },
     authUserId: {
         type: Number,
         default: null,
     },
 });
 
-// Lógica para Likes
 const likeForm = useForm({});
+const saveForm = useForm({});
 
+/**
+ * Alterna el estado de like de una publicación
+ * Requiere autenticación para funcionar
+ */
 const toggleLike = () => {
     if (!props.authUserId) {
         alert('Debes iniciar sesión para dar "Me gusta".');
@@ -41,9 +63,10 @@ const toggleLike = () => {
     }
 };
 
-// Lógica para Guardar/Desguardar
-const saveForm = useForm({});
-
+/**
+ * Alterna el estado de guardado de una publicación
+ * Requiere autenticación para funcionar
+ */
 const toggleSave = () => {
     if (!props.authUserId) {
         alert('Debes iniciar sesión para guardar publicaciones.');

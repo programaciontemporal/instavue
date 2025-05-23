@@ -2,42 +2,54 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
+// Components
 import AppHeader from '@/components/AppHeader.vue';
 import NavUser from '@/components/NavUser.vue';
 import Sonner from '@/components/ui/sonner/Sonner.vue';
 
+/**
+ * Estado y autenticación
+ */
 const page = usePage();
 const auth = computed(() => page.props.auth);
-
-// Almacena la consulta de búsqueda globalmente en AppLayout
 const globalSearchQuery = ref('');
 
-// Maneja el evento cuando se dispara una búsqueda desde AppHeader
+/**
+ * Manejadores de eventos de búsqueda
+ */
+/**
+ * Procesa la acción de búsqueda cuando el usuario la confirma
+ * @param {string} query - Término de búsqueda a procesar
+ */
 const handleSearchTriggered = (query) => {
-    // Aquí puedes añadir la lógica para iniciar una búsqueda de contenido
-    // en la página actual. `query` contiene el término de búsqueda.
+    // TODO: Implementar lógica de búsqueda
 };
 
-// Maneja el evento cuando el texto de búsqueda cambia en AppHeader
+/**
+ * Actualiza el estado global de búsqueda
+ * @param {string} query - Nuevo término de búsqueda
+ */
 const handleSearchQueryChanged = (query) => {
     globalSearchQuery.value = query;
-    // Puedes usar `globalSearchQuery.value` para filtrar resultados
-    // en tiempo real si lo deseas.
 };
 </script>
 
 <template>
+    <!-- Layout principal -->
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <!-- Cabecera de la aplicación -->
         <AppHeader
             @search-triggered="handleSearchTriggered"
             @search-query-changed="handleSearchQueryChanged"
         >
+            <!-- Sección del logo -->
             <template #logo>
                 <Link :href="route('feed')">
                     <img src="/images/instavue-logo.png" alt="InstaVue Logo" class="h-8 w-auto">
                 </Link>
             </template>
 
+            <!-- Enlaces de navegación -->
             <template #navigation>
                 <Link :href="route('feed')"
                     class="me-4 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
@@ -49,6 +61,7 @@ const handleSearchQueryChanged = (query) => {
                 </Link>
             </template>
 
+            <!-- Acciones del usuario -->
             <template #user-actions>
                 <Link :href="route('posts.create')"
                     class="me-4 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
@@ -61,17 +74,21 @@ const handleSearchQueryChanged = (query) => {
             </template>
         </AppHeader>
 
+        <!-- Cabecera opcional -->
         <header v-if="$slots.header" class="bg-white dark:bg-gray-800 shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <slot name="header" />
             </div>
         </header>
 
+        <!-- Contenido principal -->
         <main class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <slot :searchQuery="globalSearchQuery" />
             </div>
         </main>
     </div>
+
+    <!-- Sistema de notificaciones -->
     <Sonner richColors />
 </template>

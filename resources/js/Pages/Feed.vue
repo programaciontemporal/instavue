@@ -1,16 +1,33 @@
-<script setup>
-import AppLayout from '@/layouts/AppLayout.vue'; // Tu layout principal
-import PostCard from '@/components/PostCard.vue'; // Importa tu componente PostCard
-import { Head, Link } from '@inertiajs/vue3'; // Importa Head para el título y Link para la paginación
+/**
+ * @file Feed.vue
+ * @description Componente que muestra el feed principal del usuario
+ * Presenta las publicaciones en un grid responsivo con paginación
+ */
+<script setup lang="ts">
+import AppLayout from '@/layouts/AppLayout.vue';
+import PostCard from '@/components/PostCard.vue';
+import { Head, Link } from '@inertiajs/vue3';
 
-// Define las props que esperas recibir del controlador (en este caso, 'posts')
-defineProps({
-    posts: Object, // Inertia.js pasa los datos paginados como un objeto con 'data', 'links', etc.
-});
+interface Post {
+    id: number;
+    // ... otros campos del post
+}
+
+interface Props {
+    posts: {
+        data: Post[];
+        links: Array<{
+            url: string | null;
+            label: string;
+            active: boolean;
+        }>;
+    };
+}
+
+defineProps<Props>();
 </script>
 
 <template>
-
     <Head title="Feed" />
     <AppLayout>
         <template #header>
@@ -32,15 +49,24 @@ defineProps({
                         <p>No hay publicaciones disponibles en este momento. ¡Sé el primero en publicar!</p>
                     </div>
 
+                    <!-- Componente de paginación -->
                     <div v-if="posts.links && posts.links.length > 3" class="mt-8 flex justify-center">
                         <template v-for="link in posts.links" :key="link.label">
-                            <Link v-if="link.url" :href="link.url" v-html="link.label"
-                                class="px-3 py-1 mx-1 border rounded" :class="{
-                                    'bg-blue-500 text-white': link.active, // Estilo para el enlace activo
-                                    'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active, // Estilo para enlaces inactivos
-                                }" />
-                            <span v-else v-html="link.label"
-                                class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700"></span>
+                            <Link
+                                v-if="link.url"
+                                :href="link.url"
+                                v-html="link.label"
+                                class="px-3 py-1 mx-1 border rounded"
+                                :class="{
+                                    'bg-blue-500 text-white': link.active,
+                                    'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active,
+                                }"
+                            />
+                            <span
+                                v-else
+                                v-html="link.label"
+                                class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700"
+                            ></span>
                         </template>
                     </div>
                 </div>

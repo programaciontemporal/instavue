@@ -12,7 +12,8 @@ use Illuminate\Validation\ValidationException;
 class CommentController extends Controller
 {
     /**
-     * Almacena un nuevo comentario para una publicación.
+     * Crea un nuevo comentario en una publicación.
+     * Valida el contenido del comentario y maneja posibles errores de validación.
      */
     public function store(Request $request, Post $post): RedirectResponse
     {
@@ -35,7 +36,8 @@ class CommentController extends Controller
     }
 
     /**
-     * Elimina un comentario.
+     * Elimina un comentario específico.
+     * Verifica que el usuario sea el autor del comentario o el dueño de la publicación.
      */
     public function destroy(Comment $comment): RedirectResponse
     {

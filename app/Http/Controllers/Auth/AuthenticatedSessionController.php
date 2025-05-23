@@ -11,23 +11,22 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 
+/**
+ * Controlador para gestionar la autenticación de sesiones de usuario
+ *
+ * Este controlador maneja las operaciones relacionadas con la autenticación
+ * de usuarios, incluyendo el inicio y cierre de sesión.
+ */
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Show the login page.
-     * Este método ha sido comentado/eliminado.
-     * La ruta 'auth.combined' ahora renderiza directamente el componente LoginRegisterSlider.vue.
-     */
-    // public function create(Request $request): Response
-    // {
-    //     return Inertia::render('auth/Login', [
-    //         'canResetPassword' => Route::has('password.request'),
-    //         'status' => $request->session()->get('status'),
-    //     ]);
-    // }
+    // El método create ha sido eliminado ya que la ruta 'auth.combined'
+    // ahora maneja directamente el renderizado a través de LoginRegisterSlider.vue
 
     /**
-     * Handle an incoming authentication request.
+     * Procesa una solicitud de autenticación entrante
+     *
+     * @param LoginRequest $request La solicitud de inicio de sesión validada
+     * @return RedirectResponse Redirección al perfil del usuario si la autenticación es exitosa
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -39,7 +38,16 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Destroy an authenticated session.
+     * Cierra la sesión del usuario actual
+     *
+     * Este método realiza las siguientes acciones:
+     * - Cierra la sesión del usuario
+     * - Invalida la sesión actual
+     * - Regenera el token CSRF
+     * - Redirecciona al usuario a la página principal
+     *
+     * @param Request $request La solicitud HTTP
+     * @return RedirectResponse Redirección a la página principal
      */
     public function destroy(Request $request): RedirectResponse
     {

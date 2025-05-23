@@ -1,30 +1,44 @@
-<script setup>
+/**
+ * @file Posts/Create.vue
+ * @description Componente para la creación de nuevas publicaciones
+ * Permite subir una imagen y añadir un pie de foto
+ * Incluye previsualización de imagen y manejo de formularios con Inertia
+ */
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import InputError from '@/components/InputError.vue';
 import InputLabel from '@/components/ui/label/Label.vue';
-import PrimaryButton from '@/components/ui/button/Button.vue';
+import PrimaryButton from '@/components/ui/button/Button.vue'; // Asegúrate de que esto apunta a tu botón de estilo primario
 import TextInput from '@/components/ui/input/Input.vue';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-// ¡¡¡LÍNEA CORREGIDA AQUÍ!!!
 import Textarea from '@/components/ui/textarea/Textarea.vue';
 import { ref, watch } from 'vue';
-
 import { Head, useForm } from '@inertiajs/vue3';
 
+interface PostFormData {
+    image: File | null;
+    caption: string;
+}
+
 const form = useForm({
-    image: null,
+    image: null as File | null,
     caption: '',
 });
 
-// Para la previsualización de la imagen
-const imageUrl = ref(null);
+// Referencia para la previsualización de la imagen
+const imageUrl = ref<string | null>(null);
 
-// Watcher para actualizar la previsualización cuando se selecciona una imagen
+// Referencia al input de tipo file oculto
+const fileInput = ref<HTMLInputElement | null>(null);
+
+// Actualiza la previsualización cuando se selecciona una imagen
 watch(() => form.image, (newImage) => {
     if (newImage) {
         const reader = new FileReader();
         reader.onload = (e) => {
-            imageUrl.value = e.target.result;
+            if (e.target) {
+                imageUrl.value = e.target.result as string;
+            }
         };
         reader.readAsDataURL(newImage);
     } else {
@@ -32,63 +46,92 @@ watch(() => form.image, (newImage) => {
     }
 });
 
+/**
+ * Maneja el envío del formulario
+ * Realiza la subida usando FormData y reinicia el formulario al terminar
+ */
 const submit = () => {
     form.post(route('posts.store'), {
         forceFormData: true,
         onFinish: () => {
-            form.reset('image', 'caption');
+            form.reset();
             imageUrl.value = null;
+            // Limpia el input de archivo también
+            if (fileInput.value) {
+                fileInput.value.value = '';
+            }
         },
     });
+};
+
+const handleFileInput = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+        form.image = target.files[0];
+    }
+};
+
+// Función para activar el input de archivo al hacer clic en el botón personalizado
+const triggerFileInput = () => {
+    fileInput.value?.click();
 };
 </script>
 
 <template>
-
     <Head title="Crear Publicación" />
 
     <AppLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Crear Nueva Publicación
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                Crear Nueva Publicación
             </h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
-                <Card class="w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-200">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <Card class="max-w-xl mx-auto">
                     <CardHeader>
-                        <CardTitle>Nueva Publicación</CardTitle>
-                        <CardDescription>Sube una imagen y añade una descripción a tu post.</CardDescription>
+                        <CardTitle>Crear Publicación</CardTitle>
+                        <CardDescription>Comparte un momento especial con tus seguidores</CardDescription>
                     </CardHeader>
+
                     <CardContent>
-                        <form @submit.prevent="submit">
-                            <div class="mb-4">
+                        <form @submit.prevent="submit" class="space-y-6">
+                            <div>
                                 <InputLabel for="image" value="Imagen" />
-                                <input type="file" @input="form.image = $event.target.files[0]" id="image" class="mt-1 block w-full text-gray-900 dark:text-gray-100
-                                           file:mr-4 file:py-2 file:px-4
-                                           file:rounded-full file:border-0
-                                           file:text-sm file:font-semibold
-                                           file:bg-violet-50 file:text-violet-700
-                                           hover:file:bg-violet-100 dark:file:bg-violet-900 dark:file:text-violet-200
-                                           dark:hover:file:bg-violet-800" accept="image/*" />
+                                <div class="relative mt-1">
+                                    <PrimaryButton type="button" @click="triggerFileInput">
+                                        Seleccionar Imagen
+                                    </PrimaryButton>
+
+                                    <input
+                                        ref="fileInput"
+                                        type="file"
+                                        @change="handleFileInput"
+                                        id="image"
+                                        accept="image/*"
+                                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                    />
+                                </div>
                                 <InputError class="mt-2" :message="form.errors.image" />
 
-                                <div v-if="imageUrl" class="mt-4 flex justify-center">
-                                    <img :src="imageUrl" alt="Previsualización de la imagen"
-                                        class="max-w-full h-auto max-h-80 rounded-md shadow-md object-contain" />
+                                <div v-if="imageUrl" class="mt-4">
+                                    <img :src="imageUrl" alt="Preview" class="max-w-full h-auto rounded-lg" />
                                 </div>
                             </div>
 
-                            <div class="mt-6">
-                                <InputLabel for="caption" value="Descripción (opcional)" />
-                                <Textarea id="caption"
-                                    class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                                    v-model="form.caption" rows="4"
-                                    placeholder="Escribe algo sobre tu publicación..." />
+                            <div>
+                                <InputLabel for="caption" value="Pie de foto" />
+                                <Textarea
+                                    id="caption"
+                                    v-model="form.caption"
+                                    class="mt-1 block w-full"
+                                    placeholder="Escribe un pie de foto..."
+                                />
                                 <InputError class="mt-2" :message="form.errors.caption" />
                             </div>
 
-                            <div class="flex items-center justify-end mt-8">
+                            <div class="flex items-center justify-end">
                                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                                     Publicar
                                 </PrimaryButton>

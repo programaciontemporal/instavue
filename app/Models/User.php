@@ -7,12 +7,31 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str; // Importa la clase Str para usar Str::title()
+use Illuminate\Support\Str;
 
+/**
+ * Modelo User - Representa un usuario en la aplicación
+ *
+ * Este modelo gestiona toda la información relacionada con los usuarios,
+ * incluyendo sus datos personales, autenticación y relaciones con otros modelos.
+ *
+ * @property string $name Nombre del usuario
+ * @property string $email Email único del usuario
+ * @property string $password Contraseña hasheada del usuario
+ * @property string|null $avatar Ruta del archivo de avatar del usuario
+ * @property string|null $bio Biografía o descripción del usuario
+ * @property \DateTime|null $email_verified_at Fecha de verificación del email
+ * @property string $remember_token Token para recordar sesión
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * Los atributos que son asignables masivamente.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'email',
@@ -21,25 +40,40 @@ class User extends Authenticatable
         'bio',
     ];
 
+    /**
+     * Los atributos que deben ocultarse en las arrays/JSON.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * Los atributos que deben ser convertidos a tipos nativos.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
-    // INICIO DEL CAMBIO
-
-    // Agregamos 'avatar_url' a los atributos que se añadirán automáticamente
-    // cuando el modelo se convierta a un array o JSON (para Inertia).
+    /**
+     * Los atributos que deben ser añadidos a las arrays/JSON.
+     *
+     * @var array<int, string>
+     */
     protected $appends = ['avatar_url'];
 
     /**
-     * Accesor para la URL completa del avatar o las iniciales del usuario.
-     * Este accesor siempre devolverá una URL.
+     * Obtiene la URL completa del avatar del usuario
+     *
+     * Si el usuario tiene un avatar guardado, devuelve la URL del archivo.
+     * En caso contrario, devuelve una URL para generar un avatar con las iniciales.
+     *
+     * @return string URL del avatar o URL para generar avatar con iniciales
      */
     public function getAvatarUrlAttribute()
     {
@@ -60,48 +94,63 @@ class User extends Authenticatable
         return "https://ui-avatars.com/api/?name={$name}&color=ffffff&background=007bff&size=128";
     }
 
-    // FIN DEL CAMBIO
-
-    // Tu accesor getAvatarAttribute actual es redundante si vas a usar getAvatarUrlAttribute.
-    // Te recomiendo eliminarlo para simplificar el código.
-    // Si lo mantienes, asegúrate de no usarlo para la lógica de visualización en Vue,
-    // ya que getAvatarUrlAttribute ya maneja la URL de las iniciales.
-    /*
-    public function getAvatarAttribute($value)
-    {
-        return ($value === '' || $value === null) ? null : Storage::url($value);
-    }
-    */
-
-    // Relaciones de Seguimiento
+    /**
+     * Obtiene los usuarios que este usuario está siguiendo
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function following()
     {
         return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
     }
 
+    /**
+     * Obtiene los seguidores de este usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'following_user_id', 'user_id');
     }
 
-    // Relaciones de Contenido
+    /**
+     * Obtiene todas las publicaciones creadas por este usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * Obtiene todos los "me gusta" dados por este usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
 
+    /**
+     * Obtiene todos los comentarios realizados por este usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
     /**
-     * Publicaciones guardadas por este usuario.
+     * Obtiene las publicaciones guardadas por este usuario
+     *
+     * Esta relación muchos a muchos permite a los usuarios guardar publicaciones
+     * para verlas más tarde, similar a los marcadores
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function savedPosts()
     {
@@ -109,10 +158,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the current user is following another user.
+     * Verifica si el usuario actual está siguiendo a otro usuario
      *
-     * @param   \App\Models\User    $user
-     * @return bool
+     * @param \App\Models\User $user El usuario a verificar
+     * @return bool true si el usuario actual sigue al usuario especificado
      */
     public function isFollowing(User $user): bool
     {
@@ -120,10 +169,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the current user has saved a post.
+     * Verifica si el usuario ha guardado una publicación específica
      *
-     * @param   \App\Models\Post    $post
-     * @return bool
+     * @param \App\Models\Post $post La publicación a verificar
+     * @return bool true si el usuario ha guardado la publicación
      */
     public function hasSaved(Post $post): bool
     {

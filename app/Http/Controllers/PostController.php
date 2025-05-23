@@ -9,15 +9,13 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Gate; // <-- Asegúrate de que esta línea esté presente
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // ELIMINA COMPLETAMENTE EL MÉTODO __construct() de aquí.
-
     /**
-     * Muestra el formulario para crear un nuevo post.
+     * Renderiza el formulario de creación de publicaciones.
      */
     public function create(): Response
     {
@@ -25,7 +23,8 @@ class PostController extends Controller
     }
 
     /**
-     * Almacena un nuevo post en la base de datos.
+     * Almacena una nueva publicación con imagen y descripción opcional.
+     * Valida la imagen y redirige al perfil del usuario tras crear la publicación.
      */
     public function store(Request $request): RedirectResponse
     {
@@ -49,7 +48,7 @@ class PostController extends Controller
     }
 
     /**
-     * Muestra un post específico.
+     * Muestra una publicación específica con sus comentarios, likes y estado de like del usuario actual.
      */
     public function show(Post $post): Response
     {
@@ -63,7 +62,8 @@ class PostController extends Controller
     }
 
     /**
-     * Muestra el formulario para editar un post.
+     * Muestra el formulario de edición de una publicación.
+     * Verifica que el usuario tenga permiso para editar la publicación.
      */
     public function edit(Post $post): Response
     {
@@ -75,11 +75,12 @@ class PostController extends Controller
     }
 
     /**
-     * Actualiza un post existente en la base de datos.
+     * Actualiza la descripción de una publicación existente.
+     * Verifica los permisos del usuario y valida los datos.
      */
     public function update(Request $request, Post $post): RedirectResponse
     {
-        Gate::authorize('update', $post); // <-- Volvemos a añadir esta línea
+        Gate::authorize('update', $post);
 
         try {
             $request->validate([
@@ -96,11 +97,12 @@ class PostController extends Controller
     }
 
     /**
-     * Elimina un post de la base de datos.
+     * Elimina una publicación y su imagen asociada del almacenamiento.
+     * Verifica los permisos del usuario antes de proceder.
      */
     public function destroy(Post $post): RedirectResponse
     {
-        Gate::authorize('delete', $post); // <-- Volvemos a añadir esta línea
+        Gate::authorize('delete', $post);
 
         if ($post->image_path) {
             Storage::disk('public')->delete($post->getRawOriginal('image_path'));

@@ -17,17 +17,23 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
+    /**
+     * Muestra el formulario de edición del perfil del usuario.
+     * Incluye información del estado de verificación de email y datos del usuario.
+     */
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user()->hasVerifiedEmail(),
             'status' => session('status'),
-            // CAMBIO CLAVE: Usamos 'append('avatar_url')' para que Inertia reciba este atributo.
-            // Aunque uses 'only', 'append' fuerza la inclusión.
             'user' => $request->user()->append('avatar_url')->only('id', 'name', 'email', 'avatar', 'bio', 'avatar_url'),
         ]);
     }
 
+    /**
+     * Actualiza la información del perfil del usuario.
+     * Maneja la actualización del avatar y la verificación del email.
+     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
@@ -56,6 +62,10 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
+    /**
+     * Elimina la cuenta del usuario y todos sus datos asociados.
+     * Incluye la eliminación del avatar y la invalidación de la sesión.
+     */
     public function destroy(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
@@ -78,9 +88,12 @@ class ProfileController extends Controller
         return to_route('welcome');
     }
 
+    /**
+     * Muestra el perfil público de un usuario.
+     * Incluye sus publicaciones, estadísticas de seguidores y estado de seguimiento.
+     */
     public function show(User $user): Response
     {
-        // CAMBIO CLAVE: Aseguramos que el usuario de perfil que se muestra tenga 'avatar_url'.
         $user->append('avatar_url');
 
         $posts = $user->posts()
@@ -89,7 +102,6 @@ class ProfileController extends Controller
                       ->paginate(12);
 
         $posts->through(function ($post) {
-            // CAMBIO CLAVE: Para cada post, asegura que el usuario asociado también tenga 'avatar_url'.
             $post->user->append('avatar_url');
 
             $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
@@ -107,7 +119,6 @@ class ProfileController extends Controller
                 'likes' => $post->likes->map(fn($like) => ['user_id' => $like->user_id]),
                 'likes_count' => $post->likes->count(),
                 'comments' => $post->comments->map(function ($comment) {
-                    // CAMBIO CLAVE: Para cada comentario, asegura que el usuario del comentario tenga 'avatar_url'.
                     $comment->user->append('avatar_url');
                     return [
                         'id' => $comment->id,

@@ -22,7 +22,6 @@ class UserSeeder extends Seeder
             'avatar' => null, // Inicialmente null, o podrías poner una URL por defecto aquí
         ]);
 
-        // Puedes añadir más usuarios aquí si lo necesitas
         User::create([
             'name' => 'María López',
             'email' => 'maria@correo.com',

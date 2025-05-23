@@ -1,13 +1,32 @@
-<script setup>
+/**
+ * @file Home.vue
+ * @description Página principal de la aplicación que muestra el feed de publicaciones
+ * Incluye paginación y manejo de estados vacíos.
+ */
+<script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import PostCard from '@/components/PostCard.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
-defineProps({
-    posts: Object, // Ahora 'posts' es un objeto paginado
-    authUserId: Number,
-    user: Object, // Prop para el usuario autenticado (si es necesario para el layout o el componente)
-});
+interface Post {
+    id: number;
+    // ... otros campos del post
+}
+
+interface Props {
+    posts: {
+        data: Post[];
+        links: Array<{
+            url: string | null;
+            label: string;
+            active: boolean;
+        }>;
+    };
+    authUserId: number;
+    user: Record<string, any>;
+}
+
+defineProps<Props>();
 </script>
 
 <template>

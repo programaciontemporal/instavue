@@ -12,21 +12,21 @@ use Illuminate\Http\RedirectResponse;
 class SavedPostController extends Controller
 {
     /**
-     * Display a listing of saved posts for the authenticated user.
+     * Muestra el listado de publicaciones guardadas por el usuario autenticado.
+     * Las publicaciones se cargan con sus relaciones y se ordenan por fecha de guardado.
+     * Incluye información de likes, comentarios y estado de guardado.
      */
     public function index(): Response
     {
-        // Obtener las publicaciones guardadas por el usuario autenticado, paginadas
         $savedPosts = Auth::user()->savedPosts()
                                 ->with(['user', 'likes', 'comments.user'])
-                                ->latest('saved_posts.created_at') // Ordenar por la fecha en que se guardó
+                                ->latest('saved_posts.created_at')
                                 ->paginate(10);
 
-        // Mapear la colección paginada para preparar los datos para el frontend
         $savedPosts->through(function ($post) {
             $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
-            // Asegurarse de que el post siempre tenga la propiedad is_saved_by_auth_user a true para esta vista
             $post->is_saved_by_auth_user = true;
+
             return [
                 'id' => $post->id,
                 'image_path' => $post->image_path,
@@ -64,24 +64,21 @@ class SavedPostController extends Controller
     }
 
     /**
-     * Save a post for the authenticated user.
+     * Guarda una publicación en la colección del usuario autenticado.
+     * Utiliza syncWithoutDetaching para evitar duplicados.
      */
     public function store(Post $post): RedirectResponse
     {
-        // Adjunta la publicación al usuario autenticado en la tabla pivote
         Auth::user()->savedPosts()->syncWithoutDetaching($post->id);
-
         return back()->with('success', 'Publicación guardada.');
     }
 
     /**
-     * Unsave a post for the authenticated user.
+     * Elimina una publicación de la colección de guardados del usuario.
      */
     public function destroy(Post $post): RedirectResponse
     {
-        // Desvincula la publicación del usuario autenticado en la tabla pivote
         Auth::user()->savedPosts()->detach($post->id);
-
         return back()->with('success', 'Publicación eliminada de guardados.');
     }
 }
