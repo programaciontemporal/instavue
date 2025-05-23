@@ -2,6 +2,8 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import PostCard from '@/components/PostCard.vue';
 import { Head, Link } from '@inertiajs/vue3';
+// Asegúrate de importar los iconos de Lucide
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-vue-next';
 
 defineProps({
     query: String,
@@ -44,7 +46,7 @@ const getPaginationUrl = (url, currentQuery) => {
                     <div v-if="users.data && users.data.length > 0" class="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div v-for="user in users.data" :key="user.id" class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-4 flex items-center space-x-4">
                             <Link :href="route('profile.show', user.id)">
-                                <img :src="user.avatar || '/images/default-avatar.png'" alt="Avatar" class="w-12 h-12 rounded-full object-cover">
+                                <img :src="user.avatar_url || '/images/default-avatar.png'" alt="Avatar" class="w-12 h-12 rounded-full object-cover">
                             </Link>
                             <div>
                                 <Link :href="route('profile.show', user.id)" class="text-gray-900 dark:text-gray-100 font-semibold hover:underline">
@@ -54,21 +56,35 @@ const getPaginationUrl = (url, currentQuery) => {
                             </div>
                         </div>
                     </div>
-                    <div v-if="users.data && users.data.length > 0" class="mb-8">
+                    <div v-if="users.links && users.links.length > 3" class="mb-8">
                         <div class="flex justify-center mt-4">
                             <template v-for="link in users.links" :key="link.label">
                                 <Link
                                     v-if="link.url"
                                     :href="getPaginationUrl(link.url, query)"
-                                    v-html="link.label"
-                                    class="px-3 py-1 mx-1 border rounded"
+                                    class="px-3 py-1 mx-1 border rounded flex items-center justify-center"
                                     :class="{ 'bg-blue-500 text-white': link.active, 'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active }"
-                                />
+                                >
+                                    <template v-if="link.label === 'pagination.previous'">
+                                        <ArrowLeftIcon class="size-4" />
+                                    </template>
+                                    <template v-else-if="link.label === 'pagination.next'">
+                                        <ArrowRightIcon class="size-4" />
+                                    </template>
+                                    <span v-else v-html="link.label"></span>
+                                </Link>
                                 <span
                                     v-else
-                                    v-html="link.label"
-                                    class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700"
-                                ></span>
+                                    class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+                                >
+                                    <template v-if="link.label === 'pagination.previous'">
+                                        <ArrowLeftIcon class="size-4" />
+                                    </template>
+                                    <template v-else-if="link.label === 'pagination.next'">
+                                        <ArrowRightIcon class="size-4" />
+                                    </template>
+                                    <span v-else v-html="link.label"></span>
+                                </span>
                             </template>
                         </div>
                     </div>
@@ -81,21 +97,35 @@ const getPaginationUrl = (url, currentQuery) => {
                     <div v-if="posts.data && posts.data.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         <PostCard v-for="post in posts.data" :key="post.id" :post="post" />
                     </div>
-                    <div v-if="posts.data && posts.data.length > 0" class="mt-8">
+                    <div v-if="posts.links && posts.links.length > 3" class="mt-8">
                         <div class="flex justify-center mt-4">
                             <template v-for="link in posts.links" :key="link.label">
                                 <Link
                                     v-if="link.url"
                                     :href="getPaginationUrl(link.url, query)"
-                                    v-html="link.label"
-                                    class="px-3 py-1 mx-1 border rounded"
+                                    class="px-3 py-1 mx-1 border rounded flex items-center justify-center"
                                     :class="{ 'bg-blue-500 text-white': link.active, 'text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700': !link.active }"
-                                />
+                                >
+                                    <template v-if="link.label === 'pagination.previous'">
+                                        <ArrowLeftIcon class="size-4" />
+                                    </template>
+                                    <template v-else-if="link.label === 'pagination.next'">
+                                        <ArrowRightIcon class="size-4" />
+                                    </template>
+                                    <span v-else v-html="link.label"></span>
+                                </Link>
                                 <span
                                     v-else
-                                    v-html="link.label"
-                                    class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700"
-                                ></span>
+                                    class="px-3 py-1 mx-1 border rounded pointer-events-none opacity-50 text-gray-700 dark:text-gray-300 bg-gray-200 dark:bg-gray-700 flex items-center justify-center"
+                                >
+                                    <template v-if="link.label === 'pagination.previous'">
+                                        <ArrowLeftIcon class="size-4" />
+                                    </template>
+                                    <template v-else-if="link.label === 'pagination.next'">
+                                        <ArrowRightIcon class="size-4" />
+                                    </template>
+                                    <span v-else v-html="link.label"></span>
+                                </span>
                             </template>
                         </div>
                     </div>

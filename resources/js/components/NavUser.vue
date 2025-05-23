@@ -20,7 +20,7 @@ const logout = () => {
         <DropdownMenuTrigger as-child>
             <button type="button" class="flex items-center space-x-2 focus:outline-none cursor-pointer">
                 <Avatar class="h-8 w-8">
-                    <AvatarImage v-if="user.avatar && user.avatar.length > 0" :src="user.avatar" :alt="user.name" />
+                    <AvatarImage v-if="user.avatar_url && user.avatar_url.length > 0" :src="user.avatar_url" :alt="user.name" />
                     <AvatarFallback>{{ getInitials(user.name) }}</AvatarFallback>
                 </Avatar>
                 <span v-if="user.name" class="hidden md:block text-gray-700 dark:text-gray-300">{{ user.name }}</span>

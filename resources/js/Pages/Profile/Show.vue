@@ -9,7 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getInitials } from '@/composables/useInitials';
 
 // Importa los iconos de Lucide necesarios para la paginación
-import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-vue-next'; // ¡NUEVO O ACTUALIZADO!
+import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-vue-next';
 
 const props = defineProps({
     user: Object,
@@ -19,7 +19,8 @@ const props = defineProps({
 
 // Calcula la URL del avatar del usuario del perfil
 const profileAvatarUrl = computed(() => {
-    return props.user.avatar;
+    // AHORA USA 'avatar_url' QUE ES EL ATRIBUTO GENERADO POR EL ACCESOR EN EL MODELO User
+    return props.user.avatar_url;
 });
 </script>
 
