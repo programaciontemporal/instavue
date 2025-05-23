@@ -13,6 +13,7 @@ use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\SavedPostController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 // Ruta para la página de bienvenida (home)
 Route::get('/', function () {
@@ -31,7 +32,8 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'verified'])->group(function () {
     // Rutas para el perfil de usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // CAMBIO AQUI: De PATCH a POST para que acepte la petición del frontend
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Ruta para ver un perfil de usuario específico
@@ -51,8 +53,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/feed', [HomeController::class, 'index'])->name('feed');
 
     // Rutas para seguir/dejar de seguir
-    Route::post('/profile/{user}/follow', [FollowController::class, 'store'])->name('follow');
-    Route::delete('/profile/{user}/unfollow', [FollowController::class, 'destroy'])->name('unfollow');
+    Route::post('/profile/{user}/follow', [FollowController::class, 'store'])->name('users.follow');
+    Route::delete('/profile/{user}/unfollow', [FollowController::class, 'destroy'])->name('users.unfollow');
 
     // Rutas para comentarios
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');

@@ -1,8 +1,7 @@
 <script setup>
 import { Link, useForm } from '@inertiajs/vue3';
-import { computed } from 'vue';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button'; // Corregido
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'; // Corregido
 import { getInitials } from '@/composables/useInitials';
 import { HeartIcon, MessageCircleIcon, BookmarkIcon } from 'lucide-vue-next';
 
@@ -67,13 +66,6 @@ const toggleSave = () => {
         });
     }
 };
-
-// Lógica para el avatar del usuario
-const userAvatarUrl = computed(() => {
-    // Si props.post.user.avatar es null o una cadena vacía, AvatarImage simplemente no mostrará nada,
-    // y AvatarFallback se encargará de mostrar las iniciales.
-    return props.post.user.avatar;
-});
 </script>
 
 <template>
@@ -81,7 +73,7 @@ const userAvatarUrl = computed(() => {
         <div class="flex items-center p-4 border-b border-gray-200 dark:border-gray-700">
             <Link :href="route('profile.show', post.user.id)" class="flex items-center">
                 <Avatar class="size-10 overflow-hidden rounded-full border border-gray-200 dark:border-gray-700">
-                    <AvatarImage :src="userAvatarUrl" :alt="post.user.name" class="object-cover w-full h-full" />
+                    <AvatarImage :src="post.user.avatar_url" :alt="post.user.name" class="object-cover w-full h-full" />
                     <AvatarFallback class="rounded-full bg-neutral-200 font-semibold text-black dark:bg-neutral-700 dark:text-white text-base">
                         {{ getInitials(post.user.name) }}
                     </AvatarFallback>

@@ -13,36 +13,24 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Support\Facades\Redirect; // Añadir esta importación si no está
+use Illuminate\Support\Facades\Redirect;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile settings form.
-     */
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user()->hasVerifiedEmail(),
             'status' => session('status'),
-            'user' => $request->user()->only('id', 'name', 'email', 'avatar'),
+            // CAMBIO CLAVE: Usamos 'append('avatar_url')' para que Inertia reciba este atributo.
+            // Aunque uses 'only', 'append' fuerza la inclusión.
+            'user' => $request->user()->append('avatar_url')->only('id', 'name', 'email', 'avatar', 'bio', 'avatar_url'),
         ]);
     }
 
-    /**
-     * Update the user's profile information and avatar.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar && strpos($user->getRawOriginal('avatar'), 'uploads/avatars/') !== false) {
-                Storage::disk('public')->delete($user->getRawOriginal('avatar'));
-            }
-            $avatarPath = $request->file('avatar')->store('uploads/avatars', 'public');
-            $user->avatar = $avatarPath;
-        }
 
         $user->fill($request->validated());
 
@@ -50,14 +38,24 @@ class ProfileController extends Controller
             $user->email_verified_at = null;
         }
 
+        if ($request->boolean('remove_avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $user->avatar = null;
+        } elseif ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $path = $request->file('avatar')->store('avatars', 'public');
+            $user->avatar = $path;
+        }
+
         $user->save();
 
-        return Redirect::route('profile.edit')->with('success', 'Perfil actualizado con éxito.');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
@@ -80,19 +78,20 @@ class ProfileController extends Controller
         return to_route('welcome');
     }
 
-    /**
-     * Display a specific user's profile.
-     */
     public function show(User $user): Response
     {
-        // Cargar las publicaciones del usuario con paginación y relaciones necesarias
+        // CAMBIO CLAVE: Aseguramos que el usuario de perfil que se muestra tenga 'avatar_url'.
+        $user->append('avatar_url');
+
         $posts = $user->posts()
                       ->with(['user', 'likes', 'comments.user'])
                       ->latest()
                       ->paginate(12);
 
-        // Mapear la colección paginada para preparar los datos para el frontend
         $posts->through(function ($post) {
+            // CAMBIO CLAVE: Para cada post, asegura que el usuario asociado también tenga 'avatar_url'.
+            $post->user->append('avatar_url');
+
             $post->is_liked_by_auth_user = Auth::check() ? $post->likes->contains('user_id', Auth::id()) : false;
             return [
                 'id' => $post->id,
@@ -103,27 +102,29 @@ class ProfileController extends Controller
                     'id' => $post->user->id,
                     'name' => $post->user->name,
                     'avatar' => $post->user->avatar,
+                    'avatar_url' => $post->user->avatar_url, // Envía 'avatar_url' explícitamente
                 ],
                 'likes' => $post->likes->map(fn($like) => ['user_id' => $like->user_id]),
                 'likes_count' => $post->likes->count(),
                 'comments' => $post->comments->map(function ($comment) {
+                    // CAMBIO CLAVE: Para cada comentario, asegura que el usuario del comentario tenga 'avatar_url'.
+                    $comment->user->append('avatar_url');
                     return [
                         'id' => $comment->id,
                         'body' => $comment->body,
                         'user' => [
                             'id' => $comment->user->id,
                             'name' => $comment->user->name,
+                            'avatar_url' => $comment->user->avatar_url, // Envía 'avatar_url' explícitamente
                         ],
                         'created_at' => $comment->created_at->diffForHumans(),
                     ];
                 }),
-                'comments_count' => $post->comments->count(), // ¡Ahora sí corregido DEFINITIVAMENTE!
+                'comments_count' => $post->comments->count(),
                 'is_liked_by_auth_user' => $post->is_liked_by_auth_user,
             ];
         });
 
-        // Determinar si el usuario autenticado está siguiendo a este perfil
-        // Si el perfil que se está viendo es el propio del usuario autenticado, no puede seguirse a sí mismo
         $isFollowingAuthUser = false;
         if (Auth::check() && Auth::id() !== $user->id) {
             $isFollowingAuthUser = Auth::user()->isFollowing($user);
@@ -135,14 +136,15 @@ class ProfileController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'avatar' => $user->avatar,
-                'bio' => $user->bio ?? null, // Asumiendo que User tiene un campo 'bio'
+                'bio' => $user->bio ?? null,
                 'posts_count' => $user->posts()->count(),
                 'followers_count' => $user->followers()->count(),
                 'following_count' => $user->following()->count(),
-                'is_following_auth_user' => $isFollowingAuthUser, // Este será el prop para el frontend
+                'is_following_auth_user' => $isFollowingAuthUser,
+                'avatar_url' => $user->avatar_url, // Envía 'avatar_url' explícitamente para el usuario principal
             ],
-            'posts' => $posts, // Pasa la colección paginada de posts
-            'authUserId' => Auth::id(), // Pasa el ID del usuario autenticado
+            'posts' => $posts,
+            'authUserId' => Auth::id(),
         ]);
     }
 }
