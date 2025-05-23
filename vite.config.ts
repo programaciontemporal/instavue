@@ -28,5 +28,7 @@ export default defineConfig({
             'ziggy-js': resolve(__dirname, 'vendor/tightenco/ziggy'),
         },
     },
-    // Eliminado el bloque 'build.rollupOptions'
+    optimizeDeps: {
+        exclude: ['lucide-vue-next'], // Excluye lucide-vue-next de la optimización de dependencias
+    },
 });
